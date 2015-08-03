@@ -94,17 +94,20 @@ public class ExpertsContentProvider implements ITreeContentProvider, IExpertsCha
 
 	@Override
 	public Object[] getChildren(Object parentExpertElement) {
-		return ((Expert) parentExpertElement).getChildrens().toArray();
+		//return ((Expert) parentExpertElement).getChildrens().toArray();
+		return null;
 	}
 
 	@Override
 	public Object getParent(Object expertElement) {
-		return ((Expert) expertElement).getParent();
+		//return ((Expert) expertElement).getParent();
+		return null;
 	}
 	
 	@Override
 	public boolean hasChildren(Object expertElement) {
-		return ((Expert) expertElement).hasChildrens();
+		//return ((Expert) expertElement).hasChildrens();
+		return false;
 	}
 	
 	public Object getInput() {
@@ -148,9 +151,9 @@ public class ExpertsContentProvider implements ITreeContentProvider, IExpertsCha
 	}
 	
 	private void addExpert(Expert expert) {
-		Expert parent = expert.getParent();
+		//Expert parent = expert.getParent();
 
-		if(parent != null) {
+		/*if(parent != null) {
 			_treeViewer.add(parent, expert);
 			_treeViewer.refresh(parent);
 			_treeViewer.reveal(expert);
@@ -165,16 +168,29 @@ public class ExpertsContentProvider implements ITreeContentProvider, IExpertsCha
 				}
 			} while (!find);
 			_treeViewer.insert(_treeViewer.getInput(), expert, pos);
-		}
+		}*/
+		
+		int pos = 0;
+		boolean find = false;
+		do {
+			if(_experts.get(pos) == expert) {
+				find = true;
+			} else {
+				pos++;
+			}
+		} while (!find);
+		_treeViewer.insert(_treeViewer.getInput(), expert, pos);
 	}
 	
 	private void removeExpert(Expert expert) {
-		_treeViewer.refresh(expert.getParent());
+		//_treeViewer.refresh(expert.getParent());
+		_treeViewer.refresh();
 	}
 	
 	private void modifyExpert(Expert expert) {
 		Object[] expandedElements = _treeViewer.getExpandedElements();
-		_treeViewer.refresh(expert.getParent());
+		//_treeViewer.refresh(expert.getParent());
+		_treeViewer.refresh();
 		_treeViewer.setExpandedElements(expandedElements);
 	}
 	

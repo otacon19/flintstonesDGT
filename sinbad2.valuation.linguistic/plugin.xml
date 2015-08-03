@@ -11,14 +11,6 @@
                implementation="sinbad2.valuation.linguistic.LinguisticValuation">
          </type>
       </valuation>
-      <valuation
-            domain="flintstones.domain.linguistic.unbalanced"
-            id="flintstones.valuation.linguistic.unbalanced"
-            name="%valuation.linguistic.unbalanced">
-         <type
-               implementation="sinbad2.valuation.linguistic.LinguisticValuation">
-         </type>
-      </valuation>
    </extension>
 
 </plugin>

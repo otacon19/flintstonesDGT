@@ -67,7 +67,6 @@
       <plugin id="sinbad2.aggregationoperator"/>
       <plugin id="sinbad2.aggregationoperator.arithmetic"/>
       <plugin id="sinbad2.aggregationoperator.max"/>
-      <plugin id="sinbad2.aggregationoperator.maxMin"/>
       <plugin id="sinbad2.aggregationoperator.median"/>
       <plugin id="sinbad2.aggregationoperator.min"/>
       <plugin id="sinbad2.core"/>
@@ -75,8 +74,6 @@
       <plugin id="sinbad2.domain"/>
       <plugin id="sinbad2.domain.linguistic.fuzzy"/>
       <plugin id="sinbad2.domain.linguistic.fuzzy.ui"/>
-      <plugin id="sinbad2.domain.linguistic.unbalanced"/>
-      <plugin id="sinbad2.domain.linguistic.unbalanced.ui"/>
       <plugin id="sinbad2.domain.numeric.integer"/>
       <plugin id="sinbad2.domain.numeric.integer.ui"/>
       <plugin id="sinbad2.domain.numeric.real"/>
@@ -85,7 +82,6 @@
       <plugin id="sinbad2.domain.valuations"/>
       <plugin id="sinbad2.element"/>
       <plugin id="sinbad2.element.ui"/>
-      <plugin id="sinbad2.method"/>
       <plugin id="sinbad2.rcp"/>
       <plugin id="sinbad2.resolutionphase"/>
       <plugin id="sinbad2.resolutionphase.framework"/>
@@ -94,23 +90,12 @@
       <plugin id="sinbad2.resolutionphase.frameworkstructuring.ui"/>
       <plugin id="sinbad2.resolutionphase.gathering"/>
       <plugin id="sinbad2.resolutionphase.gathering.ui"/>
-      <plugin id="sinbad2.resolutionphase.rating"/>
-      <plugin id="sinbad2.resolutionphase.rating.ui"/>
-      <plugin id="sinbad2.resolutionphase.sensitivityanalysis"/>
-      <plugin id="sinbad2.resolutionphase.sensitivityanalysis.ui"/>
       <plugin id="sinbad2.resolutionphase.ui"/>
       <plugin id="sinbad2.resolutionscheme"/>
       <plugin id="sinbad2.resolutionscheme.dm"/>
       <plugin id="sinbad2.resolutionscheme.dm.ui"/>
       <plugin id="sinbad2.resolutionscheme.ui"/>
       <plugin id="sinbad2.valuation"/>
-      <plugin id="sinbad2.valuation.hesitant"/>
-      <plugin id="sinbad2.valuation.integer"/>
-      <plugin id="sinbad2.valuation.integer.interval"/>
-      <plugin id="sinbad2.valuation.integer.interval.ui"/>
-      <plugin id="sinbad2.valuation.integer.ui"/>
-      <plugin id="sinbad2.valuation.linguistic"/>
-      <plugin id="sinbad2.valuation.linguistic.ui"/>
       <plugin id="sinbad2.valuation.real"/>
       <plugin id="sinbad2.valuation.real.interval"/>
       <plugin id="sinbad2.valuation.real.interval.ui"/>
@@ -118,7 +103,6 @@
       <plugin id="sinbad2.valuation.ui"/>
       <plugin id="sinbad2.valuation.valuationset"/>
       <plugin id="sinbad2.valuation.valuationset.ui"/>
-      <plugin id="sinbad2.valutation.hesitant.ui"/>
    </plugins>
 
 

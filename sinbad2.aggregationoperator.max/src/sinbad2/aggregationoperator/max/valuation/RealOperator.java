@@ -10,7 +10,7 @@ import sinbad2.valuation.Valuation;
 import sinbad2.valuation.real.RealValuation;
 
 public class RealOperator {
-	
+
 	private RealOperator() {}
 	
 	public static Valuation aggregate(List<Valuation> valuations) {
@@ -38,5 +38,4 @@ public class RealOperator {
 		
 		return result;
 	}
-	
 }

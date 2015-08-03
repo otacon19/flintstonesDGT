@@ -44,22 +44,16 @@ public class ModifyCriterionHandler extends AbstractHandler {
 			criterion = (Criterion) selection.getFirstElement();
 		}
 		
-		Criterion parent = criterion.getParent();
-		
 		boolean doit = true;
 		String oldId = criterion.getId();
 		String newId = null;
-		boolean oldCost = criterion.getCost();
-		boolean newCost = false;
 		
 		ModifyCriterionInputDialog dialog = new ModifyCriterionInputDialog(Display.getCurrent().getActiveShell(), Messages.ModifyCriterionHandler_Modify_criterion, 
-				Messages.ModifyCriterionHandler_Insert_criterion_id, criterion.getId(), criterion.getCost(), new ModifyCriterionInputValidator(parent, 
-						criterion.getId(), elementSet));
+				Messages.ModifyCriterionHandler_Insert_criterion_id, criterion.getId(), new ModifyCriterionInputValidator(criterion.getId(), elementSet));
 		
 		if(dialog.open() == Window.OK) {
 			newId = dialog.getValue();
-			newCost = dialog.isCost();
-			if(newId.equals(oldId) && (oldCost == newCost)) {
+			if(newId.equals(oldId)) {
 				doit = false;
 			}
 		} else {
@@ -67,7 +61,7 @@ public class ModifyCriterionHandler extends AbstractHandler {
 		}
 		
 		if(doit) {
-			IUndoableOperation operation = new ModifyCriterionOperation(Messages.ModifyCriterionHandler_Modify_criterion, criterion, newId, newCost, elementSet);
+			IUndoableOperation operation = new ModifyCriterionOperation(Messages.ModifyCriterionHandler_Modify_criterion, criterion, newId, elementSet);
 			IOperationHistory operationHistory = OperationHistoryFactory.getOperationHistory();
 			
 			operation.addContext(IOperationHistory.GLOBAL_UNDO_CONTEXT);

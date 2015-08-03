@@ -145,7 +145,7 @@ public class AssignmentsProviderView extends ViewPart implements IAlternativesCh
 					expert = null;
 				} else {
 					item = _expertCombo.getItem(pos);
-					expert = Expert.getExpertByCanonicalId(_experts, item);
+					//expert = Expert.getExpertByCanonicalId(_experts, item);
 				}
 
 				pos = _alternativeCombo.getSelectionIndex();
@@ -294,11 +294,11 @@ public class AssignmentsProviderView extends ViewPart implements IAlternativesCh
 	private List<String> extractExpertValues(Expert expert) {
 		List<String> result = new LinkedList<String>();
 
-		if (expert.hasChildrens()) {
+		/*if (expert.hasChildrens()) {
 			for (Expert e : expert.getChildrens()) {
 				result.addAll(extractExpertValues(e));
 			}
-		}
+		}*/
 
 		result.add(expert.getCanonicalId());
 
@@ -329,12 +329,6 @@ public class AssignmentsProviderView extends ViewPart implements IAlternativesCh
 
 	private List<String> extractCriterionValues(Criterion criterion) {
 		List<String> result = new LinkedList<String>();
-
-		if (criterion.hasSubcriteria()) {
-			for (Criterion c : criterion.getSubcriteria()) {
-				result.addAll(extractCriterionValues(c));
-			}
-		}
 
 		result.add(criterion.getCanonicalId());
 

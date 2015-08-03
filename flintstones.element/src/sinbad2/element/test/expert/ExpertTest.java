@@ -1,6 +1,6 @@
 package sinbad2.element.test.expert;
 
-import static org.hamcrest.CoreMatchers.is;
+/*import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 import java.util.LinkedList;
@@ -9,13 +9,14 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import sinbad2.element.expert.Expert;
+import sinbad2.element.expert.Expert;*/
 
 public class ExpertTest {
 	
-	private Expert _tester;
-	private Expert _parent;
-
+	//private Expert _tester;
+	//private Expert _parent;
+	
+	/*
 	@Before 
 	public void testExpertBefore() {
 		List<Expert> childrens = new LinkedList<Expert>();
@@ -79,6 +80,6 @@ public class ExpertTest {
 		assertEquals("must be the correct expert", _tester, Expert.getExpertByCanonicalId( //$NON-NLS-1$
 				experts, _parent.getId() + ">" + _tester.getId())); //$NON-NLS-1$
 		
-	}
+	}*/
 
 }

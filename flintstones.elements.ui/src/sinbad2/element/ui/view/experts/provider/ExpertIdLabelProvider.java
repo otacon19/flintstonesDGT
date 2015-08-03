@@ -17,11 +17,12 @@ public class ExpertIdLabelProvider extends ColumnLabelProvider {
 
 	@Override
 	public Image getImage(Object obj){
-		if(((Expert) obj).hasChildrens()) {
+		/*if(((Expert) obj).hasChildrens()) {
 			return Images.GroupOfExperts;
 		} else {
 			return Images.Expert;
-		}
+		}*/
+		return Images.Expert;
 	}
 
 }

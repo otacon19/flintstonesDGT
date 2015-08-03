@@ -3,7 +3,7 @@ package sinbad2.element.expert.handler.move;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.commands.operations.IOperationHistory;
+/*import org.eclipse.core.commands.operations.IOperationHistory;
 import org.eclipse.core.commands.operations.IUndoableOperation;
 import org.eclipse.core.commands.operations.OperationHistoryFactory;
 
@@ -11,11 +11,11 @@ import sinbad2.element.ProblemElementsManager;
 import sinbad2.element.ProblemElementsSet;
 import sinbad2.element.expert.Expert;
 import sinbad2.element.expert.operation.MoveExpertOperation;
-import sinbad2.element.nls.Messages;
+import sinbad2.element.nls.Messages;*/
 
 public class MoveExpertHandler extends AbstractHandler {
 
-	public static final String ID = "flintstones.element.expert.move"; //$NON-NLS-1$
+	/*public static final String ID = "flintstones.element.expert.move"; //$NON-NLS-1$
 	
 	private Expert _expert;
 	private Expert _newParent;
@@ -26,11 +26,11 @@ public class MoveExpertHandler extends AbstractHandler {
 		this();
 		_expert = expert;
 		_newParent = newParent;
-	}
+	}*/
 	
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		
+		/*
 		ProblemElementsManager elementManager = ProblemElementsManager.getInstance();
 		ProblemElementsSet elementSet = elementManager.getActiveElementSet();
 		
@@ -38,7 +38,7 @@ public class MoveExpertHandler extends AbstractHandler {
 		IOperationHistory operationHistory = OperationHistoryFactory.getOperationHistory();
 		
 		operation.addContext(IOperationHistory.GLOBAL_UNDO_CONTEXT);
-		operationHistory.execute(operation, null, null);
+		operationHistory.execute(operation, null, null);*/
 		
 		return null;
 	}

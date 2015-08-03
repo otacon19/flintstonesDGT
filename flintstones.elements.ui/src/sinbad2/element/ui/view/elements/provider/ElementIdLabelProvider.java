@@ -20,19 +20,16 @@ public class ElementIdLabelProvider extends ColumnLabelProvider {
 	public Image getImage(Object element) {
 		
 		if(element instanceof Expert) {
-			if(((Expert) element).hasChildrens()) {
+			/*if(((Expert) element).hasChildrens()) {
 				return Images.GroupOfExperts;
 			} else {
 				return Images.Expert;
-			}
+			}*/
+			return Images.Expert;
 		} else if(element instanceof Alternative) {
 			return Images.Alternative;
 		} else if(element instanceof Criterion) {
-			if(((Criterion) element).hasSubcriteria()) {
-				return Images.Criteria;
-			} else {
-				return Images.Criterion;
-			}
+			return Images.Criterion;
 		} else {
 			return null;
 		}

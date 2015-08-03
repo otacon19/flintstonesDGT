@@ -16,9 +16,6 @@
          <phase
                resolution_phase="flintstones.resolutionphase.gathering">
          </phase>
-         <phase
-               resolution_phase="flintstones.resolutionphase.sensitivityanalysis">
-         </phase>
       </scheme>
    </extension>
 

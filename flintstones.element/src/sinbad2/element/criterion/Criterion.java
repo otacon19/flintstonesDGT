@@ -1,7 +1,5 @@
 package sinbad2.element.criterion;
 
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -12,16 +10,8 @@ import sinbad2.element.ProblemElement;
 
 public class Criterion extends ProblemElement {
 	
-	private List<Criterion> _subcriteria;
-	private Criterion _parent;
-	private boolean _cost;
-	
 	public Criterion() {
 		super();
-		
-		_subcriteria = null;
-		_parent = null;
-		_cost = false;
 	}
 	
 	public Criterion(String id) {
@@ -30,74 +20,9 @@ public class Criterion extends ProblemElement {
 	
 	@Override
 	public String getCanonicalId() {
-		String result = null;
-		
-		if(_parent != null) {
-			result = _parent.getCanonicalId() + ">" + _id; //$NON-NLS-1$
-		} else {
-			result = _id;
-		}
-		
+		String result = _id;
+
 		return result;
-	}
-	
-	public void setParent(Criterion parent) {
-		_parent = parent;
-	}
-	
-	public Criterion getParent() {
-		return _parent;
-	}
-	
-	public void setCost(Boolean cost) {
-		_cost = cost;
-	}
-	
-	public boolean getCost() {
-		return _cost;
-	}
-	
-	public void addSubcriterion(Criterion subcriterion) {
-		Validator.notNull(subcriterion);
-		Validator.notSameElement(this, subcriterion);
-		
-		if(_subcriteria == null) {
-			_subcriteria = new LinkedList<Criterion>();
-		} 
-		
-		subcriterion.setParent(this);
-		_subcriteria.add(subcriterion);
-		
-		Collections.sort(_subcriteria);
-	}
-	
-	public void removeSubcriterion(Criterion subcriterion) {
-		
-		if(_subcriteria != null) {
-			_subcriteria.remove(subcriterion);
-			subcriterion.setParent(null);
-		}
-		
-		Collections.sort(_subcriteria);
-	}
-	
-	public List<Criterion> getSubcriteria() {
-		return _subcriteria;
-	}
-	
-	public void setSubcriteria(List<Criterion> subcriteria) {
-		_subcriteria = subcriteria;
-	}
-	
-	public boolean hasSubcriteria() {
-		
-		if(_subcriteria != null) {
-			if(!_subcriteria.isEmpty()) {
-				return true;
-			}
-		}
-		
-		return false;
 	}
 	
 	@Override
@@ -118,10 +43,7 @@ public class Criterion extends ProblemElement {
 		final Criterion other = (Criterion) obj;
 		
 		EqualsBuilder eb = new EqualsBuilder();
-		eb.append(_parent, other._parent);
 		eb.append(_id, other._id);
-		eb.append(_subcriteria, other._subcriteria);
-		eb.append(_cost, other._cost);
 		
 		return eb.isEquals();
 	}
@@ -131,14 +53,9 @@ public class Criterion extends ProblemElement {
 		Validator.notNull(criteria);
 		Validator.notNull(formatId);
 		
-		if(formatId.contains(">")) { //$NON-NLS-1$
-			String parentId = formatId.split(">")[0]; //$NON-NLS-1$
-			return searchCriterionForPathId(parentId, formatId, criteria);
-		} else {
-			for(Criterion criterion: criteria) {
-				if(criterion.getId().equals(formatId)) {
-					return criterion;
-				}
+		for(Criterion criterion: criteria) {
+			if(criterion.getId().equals(formatId)) {
+				return criterion;
 			}
 		}
 		
@@ -149,12 +66,7 @@ public class Criterion extends ProblemElement {
 	public int hashCode() {
 		HashCodeBuilder hcb = new HashCodeBuilder(17, 31);
 		hcb.append(getCanonicalId());
-		if(hasSubcriteria()) {
-			for(Criterion criterion: _subcriteria) {
-				hcb.append(criterion);
-			}
-		}
-		hcb.append(getCost());
+
 		return hcb.toHashCode();
 	}
 	
@@ -163,28 +75,7 @@ public class Criterion extends ProblemElement {
 		Criterion result = null;
 		
 		result = (Criterion) super.clone();
-		result.setParent(_parent);
-		result.setCost(_cost);
-		
-		if(hasSubcriteria()) {
-			List<Criterion> subcriteria = new LinkedList<Criterion>();
-			for(Criterion criterion: _subcriteria) {
-				subcriteria.add((Criterion)criterion.clone());
-			}
-			result.setSubcriteria(subcriteria);
-		}
 		
 		return result;
-	}
-	
-	private static Criterion searchCriterionForPathId(String parentId, String formatId, List<Criterion> criteria) {
-		
-		for(Criterion criterion: criteria) {
-			if(criterion.getId().equals(parentId)) {
-				return getCriterionByCanonicalId(criterion.getSubcriteria(), formatId.substring(parentId.length() + 1));
-			}
-		}
-		
-		return null;
 	}
 }

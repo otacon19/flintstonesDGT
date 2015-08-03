@@ -1,5 +1,7 @@
 package sinbad2.aggregationoperator.arithmetic.valuation;
 
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import sinbad2.core.validator.Validator;
@@ -12,10 +14,9 @@ public class RealOperator {
 	private RealOperator() {}
 	
 	public static Valuation aggregate(List<Valuation> valuations) {
-		RealValuation result = null;
-		double value = 0;
-		int size = valuations.size();
+		Valuation result = null;
 		NumericRealDomain domain = null;
+		List<Valuation> values = new LinkedList<Valuation>();
 		
 		for(Valuation valuation: valuations) {
 			Validator.notIllegalElementType(valuation, new String[] {RealValuation.class.toString()});
@@ -26,14 +27,16 @@ public class RealOperator {
 				throw new IllegalArgumentException("Invalid domain");
 			}
 			
-			value += (((RealValuation) valuation).getValue()) / (double) size;
+			values.add((RealValuation) valuation);
 		}
 		
-		if(domain != null) {
-			result = (RealValuation) valuations.get(0).clone();
-			result.setValue(value);
+		if(!values.isEmpty()) {
+			Collections.sort(values);
+			result = values.get(values.size() - 1);
+			result = (Valuation) result.clone();
 		}
 		
 		return result;
 	}
+	
 }

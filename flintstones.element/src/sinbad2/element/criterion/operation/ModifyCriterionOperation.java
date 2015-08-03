@@ -20,34 +20,17 @@ public class ModifyCriterionOperation extends UndoableOperation {
 	private List<Criterion> _brothers;
 	private String _newId;
 	private String _oldId;
-	private boolean _newCost;
-	private boolean _oldCost;
 	
 
-	public ModifyCriterionOperation(String label, Criterion modifyCriterion, String newId, Boolean newCost, ProblemElementsSet elementSet) {
+	public ModifyCriterionOperation(String label, Criterion modifyCriterion, String newId, ProblemElementsSet elementSet) {
 		super(label);
 		
 		_elementSet = elementSet;
 		_modifyCriterion = modifyCriterion;
 		_newId = newId;
-		_newCost = newCost;
 		_oldId = _modifyCriterion.getId();
-		_oldCost = _modifyCriterion.getCost();
 		
-		Criterion parent = _modifyCriterion.getParent();
-		if(parent != null) {
-			_brothers = parent.getSubcriteria();
-		} else {
-			_brothers = _elementSet.getCriteria();
-		}
-	}
-	
-	public ModifyCriterionOperation(String label, Criterion modifyCriterion, String newId, ProblemElementsSet elementSet) {
-		this(label, modifyCriterion, newId, modifyCriterion.getCost(), elementSet);
-	}
-	
-	public ModifyCriterionOperation(String label, Criterion modifyCriterion, Boolean newCost, ProblemElementsSet elementSet) {
-		this(label, modifyCriterion, modifyCriterion.getId(), newCost, elementSet);
+		_brothers = _elementSet.getCriteria();
 	}
 	
 	@Override
@@ -60,7 +43,7 @@ public class ModifyCriterionOperation extends UndoableOperation {
 		
 		Criterion oldCriterion = (Criterion) _modifyCriterion.clone();
 
-		_elementSet.modifyCriterion(_modifyCriterion, _newId, _newCost, _inUndoRedo);
+		_elementSet.modifyCriterion(_modifyCriterion, _newId, _inUndoRedo);
 		
 		if(!_newId.equals(oldCriterion.getId())) {
 			Collections.sort(_brothers);
@@ -73,7 +56,7 @@ public class ModifyCriterionOperation extends UndoableOperation {
 	@Override
 	public IStatus undo(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 		
-		_elementSet.modifyCriterion(_modifyCriterion, _oldId, _oldCost, _inUndoRedo);
+		_elementSet.modifyCriterion(_modifyCriterion, _oldId, _inUndoRedo);
 		
 		if(!_oldId.equals(_newId)) {
 			Collections.sort(_brothers);

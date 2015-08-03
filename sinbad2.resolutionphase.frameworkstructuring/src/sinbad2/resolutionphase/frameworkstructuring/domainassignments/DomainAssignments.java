@@ -135,7 +135,7 @@ public class DomainAssignments implements Cloneable, IExpertsChangeListener, IAl
 
 			if (event.isStartElement()) {
 				id = reader.getStartElementAttribute("expert"); //$NON-NLS-1$
-				expert = Expert.getExpertByCanonicalId(elementSet.getExperts(),id);
+				//expert = Expert.getExpertByCanonicalId(elementSet.getExperts(),id);
 
 				id = reader.getStartElementAttribute("criterion"); //$NON-NLS-1$
 				criterion = Criterion.getCriterionByCanonicalId(elementSet.getCriteria(), id);
@@ -243,19 +243,7 @@ public class DomainAssignments implements Cloneable, IExpertsChangeListener, IAl
 
 			} else if (ECriteriaChange.CRITERIA_CHANGES.equals(change)) {
 				removeDomainAssignmentsOperation(ERemoveDomainAssignments.ALL, null);
-
-			} else if (ECriteriaChange.ADD_CRITERION.equals(change)) {
-				Criterion criterion = (Criterion) event.getNewValue();
-				if (criterion.getParent() != null) {
-					removeDomainAssignmentsOperation(ERemoveDomainAssignments.CRITERION,criterion.getParent());
-				}
-
-			} else if (ECriteriaChange.ADD_CRITERIA.equals(change)) {
-				@SuppressWarnings("unchecked")
-				Criterion criterion = ((List<Criterion>) event.getNewValue()).get(0);
-				if (criterion.getParent() != null) {
-					removeDomainAssignmentsOperation(ERemoveDomainAssignments.CRITERION,criterion.getParent());
-				}
+				
 			} else if (ECriteriaChange.MOVE_CRITERION.equals(change)) {
 				Criterion criterion = (Criterion) event.getOldValue();
 				if (criterion != null) {
@@ -302,17 +290,17 @@ public class DomainAssignments implements Cloneable, IExpertsChangeListener, IAl
 				removeDomainAssignmentsOperation(ERemoveDomainAssignments.ALL, null);
 
 			} else if (EExpertsChange.ADD_EXPERT.equals(change)) {
-				Expert expert = (Expert) event.getNewValue();
-				if (expert.getParent() != null) {
+				//Expert expert = (Expert) event.getNewValue();
+				/*if (expert.getParent() != null) {
 					removeDomainAssignmentsOperation(ERemoveDomainAssignments.EXPERT, expert.getParent());
-				}
+				}*/
 
 			} else if (EExpertsChange.ADD_MULTIPLE_EXPERTS.equals(change)) {
-				@SuppressWarnings("unchecked")
-				Expert expert = ((List<Expert>) event.getNewValue()).get(0);
-				if (expert.getParent() != null) {
+				//@SuppressWarnings("unchecked")
+				//Expert expert = ((List<Expert>) event.getNewValue()).get(0);
+				/*if (expert.getParent() != null) {
 					removeDomainAssignmentsOperation(ERemoveDomainAssignments.EXPERT, expert.getParent());
-				}
+				}*/
 
 			} else if (EExpertsChange.MOVE_EXPERT.equals(change)) {
 				Expert expert = (Expert) event.getOldValue();

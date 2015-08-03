@@ -105,11 +105,11 @@ public class ApplyDomainAssignmentsOperation extends UndoableOperation {
 			}
 			doit = false;
 
-		} else if (expert.hasChildrens()) {
+		/*} else if (expert.hasChildrens()) {
 			for (Expert e : expert.getChildrens()) {
 				setDomain(e, alternative, criterion, domain);
 			}
-			doit = false;
+			doit = false;*/
 
 		} else if (alternative == null) {
 			for (Alternative a : _elementSet.getAlternatives()) {
@@ -119,12 +119,6 @@ public class ApplyDomainAssignmentsOperation extends UndoableOperation {
 
 		} else if (criterion == null) {
 			for (Criterion c : _elementSet.getCriteria()) {
-				setDomain(expert, alternative, c, domain);
-			}
-			doit = false;
-
-		} else if (criterion.hasSubcriteria()) {
-			for (Criterion c : criterion.getSubcriteria()) {
 				setDomain(expert, alternative, c, domain);
 			}
 			doit = false;

@@ -10,8 +10,6 @@ import sinbad2.element.ui.nls.Messages;
 
 public class AddCriterionInputValidator implements IInputValidator {
 	
-	private boolean _isMember;
-	private Criterion _parent;
 	private ProblemElementsSet _elementSet;
 	
 	public AddCriterionInputValidator() {
@@ -19,13 +17,7 @@ public class AddCriterionInputValidator implements IInputValidator {
 	}
 	
 	public AddCriterionInputValidator(Criterion parent, ProblemElementsSet elementSet) {
-		_parent = parent;
-		_isMember = (_parent != null);
 		_elementSet = elementSet;
-	}
-	
-	public void setIsMember(Boolean isMember) {
-		_isMember = isMember;
 	}
 	
 	@Override
@@ -35,11 +27,7 @@ public class AddCriterionInputValidator implements IInputValidator {
 		
 		List<Criterion> brothers_or_others = null;
 		
-		if(_isMember) {
-			brothers_or_others = _parent.getSubcriteria();
-		} else {
-			brothers_or_others = _elementSet.getCriteria();
-		}
+		brothers_or_others = _elementSet.getCriteria();
 		
 		if(newText.isEmpty()) {
 			return Messages.AddCriterionInputValidator_Empty_value_not_allowed;

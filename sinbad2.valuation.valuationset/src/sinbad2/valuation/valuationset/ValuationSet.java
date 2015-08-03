@@ -164,7 +164,12 @@ public class ValuationSet implements IDomainSetListener, IDomainAssignmentsChang
 				domain = ds.getDomain(domainId);
 				valuation.setDomain(domain);
 				
-				expert = Expert.getExpertByCanonicalId(experts, expertId);
+				//expert = Expert.getExpertByCanonicalId(experts, expertId);
+				for (Expert e : experts) {
+					if (e.getId().equals(expertId)) {
+						expert = e;
+					}
+				}
 				criterion = Criterion.getCriterionByCanonicalId(criteria, criterionId);
 				for (Alternative a : alternatives) {
 					if (a.getId().equals(alternativeId)) {

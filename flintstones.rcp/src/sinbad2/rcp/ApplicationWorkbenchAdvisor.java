@@ -28,5 +28,6 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 			return null;
 		}
 	}
+	
 
 }

@@ -117,11 +117,12 @@ public class ElementContentProvider implements ITreeContentProvider, IExpertsCha
 	public Object[] getChildren(Object parentElement) {
 		
 		if (Expert.class.equals(_type)) {
-			return ((Expert) parentElement).getChildrens().toArray();
+			/*return ((Expert) parentElement).getChildrens().toArray();*/
+			return null;
 		} else if (Alternative.class.equals(_type)) {
 			return null;
 		} else if (Criterion.class.equals(_type)) {
-			return ((Criterion) parentElement).getSubcriteria().toArray();
+			return null;
 		} else {
 			return null;
 		}
@@ -132,11 +133,12 @@ public class ElementContentProvider implements ITreeContentProvider, IExpertsCha
 		
 		try {
 			if (Expert.class.equals(_type)) {
-				return ((Expert) element).getParent();
+				//return ((Expert) element).getParent();
+				return null;
 			} else if (Alternative.class.equals(_type)) {
 				return null;
 			} else if (Criterion.class.equals(_type)) {
-				return ((Criterion) element).getParent();
+				return null;
 			} else {
 				return null;
 			}
@@ -149,11 +151,12 @@ public class ElementContentProvider implements ITreeContentProvider, IExpertsCha
 	public boolean hasChildren(Object element) {
 		
 		if (Expert.class.equals(_type)) {
-			return ((Expert) element).hasChildrens();
+			//return ((Expert) element).hasChildrens();
+			return false;
 		} else if (Alternative.class.equals(_type)) {
 			return false;
 		} else if (Criterion.class.equals(_type)) {
-			return ((Criterion) element).hasSubcriteria();
+			return false;
 		} else {
 			return false;
 		}

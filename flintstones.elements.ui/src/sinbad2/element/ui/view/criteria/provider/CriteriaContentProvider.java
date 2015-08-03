@@ -89,17 +89,17 @@ public class CriteriaContentProvider implements ITreeContentProvider, ICriteriaC
 
 	@Override
 	public Object[] getChildren(Object parentElement) {
-		return ((Criterion) parentElement).getSubcriteria().toArray();
+		return null;
 	}
 
 	@Override
 	public Object getParent(Object element) {
-		return ((Criterion) element).getParent();
+		return null;
 	}
 
 	@Override
 	public boolean hasChildren(Object element) {
-		return ((Criterion) element).hasSubcriteria();
+		return false;
 	}
 	
 	public Object getInput() {
@@ -143,35 +143,27 @@ public class CriteriaContentProvider implements ITreeContentProvider, ICriteriaC
 	}
 	
 	private void addCriterion(Criterion criterion) {
-		Criterion parent = criterion.getParent();
-		
-		if(parent != null) {
-			_treeViewer.add(parent, criterion);
-			_treeViewer.refresh();
-			_treeViewer.reveal(criterion);
-		} else {
-			int pos = 0;
-			boolean find = false;
-			do {
-				if(_criteria.get(pos) == criterion) {
-					find = true;
-				} else {
-					pos++;
-				}
-			} while (!find);
-			_treeViewer.insert(_treeViewer.getInput(), criterion, pos);
-		}
+		int pos = 0;
+		boolean find = false;
+		do {
+			if(_criteria.get(pos) == criterion) {
+				find = true;
+			} else {
+				pos++;
+			}
+		} while (!find);
+		_treeViewer.insert(_treeViewer.getInput(), criterion, pos);
 		
 	}
 	
 	private void removeCriterion(Criterion criterion) {
-		_treeViewer.refresh(criterion.getParent());
+		_treeViewer.refresh();
 		
 	}
 	
 	private void modifyCriterion(Criterion criterion) {
 		Object[] expandedElements = _treeViewer.getExpandedElements();
-		_treeViewer.refresh(criterion.getParent());
+		_treeViewer.refresh();
 		_treeViewer.setExpandedElements(expandedElements);
 		
 	}

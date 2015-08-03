@@ -1,14 +1,14 @@
 package sinbad2.element.ui.view.experts;
 
-import java.util.List;
+//import java.util.List;
 
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
+//import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
+//import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.swt.SWT;
@@ -26,13 +26,13 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.contexts.IContextActivation;
 import org.eclipse.ui.contexts.IContextService;
 import org.eclipse.ui.part.ViewPart;
-import org.eclipse.ui.services.ISourceProviderService;
+//import org.eclipse.ui.services.ISourceProviderService;
 
 import sinbad2.element.expert.Expert;
 import sinbad2.element.ui.draganddrop.DragListener;
 import sinbad2.element.ui.draganddrop.ExpertsDropListener;
 import sinbad2.element.ui.handler.expert.modify.ModifyExpertHandler;
-import sinbad2.element.ui.sourceprovider.experts.BrothersExpertsSelectedSourceProvider;
+//import sinbad2.element.ui.sourceprovider.experts.BrothersExpertsSelectedSourceProvider;
 import sinbad2.element.ui.view.experts.provider.ExpertIdLabelProvider;
 import sinbad2.element.ui.view.experts.provider.ExpertsContentProvider;
 
@@ -140,7 +140,7 @@ public class ExpertsView extends ViewPart {
 	}
 	
 	private void hookSelectionChangeListener() {
-		_treeViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+		/*_treeViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			
 			private ISourceProviderService sourceProviderService = (ISourceProviderService) getSite().getService(ISourceProviderService.class);
 			
@@ -173,7 +173,7 @@ public class ExpertsView extends ViewPart {
 				
 			}
 				
-		});
+		});*/
 	}
 	
 	private void hookDoubleClickListener() {

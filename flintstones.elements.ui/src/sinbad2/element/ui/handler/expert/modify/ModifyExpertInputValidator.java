@@ -12,7 +12,7 @@ import sinbad2.element.ui.nls.Messages;
 public class ModifyExpertInputValidator implements IInputValidator {
 	
 	private ProblemElementsSet _elementSet;
-	private Expert _parentOfModifyExpert;
+	//private Expert _parentOfModifyExpert;
 	private List<Expert> _brothers;
 	private String _id;
 	
@@ -21,17 +21,19 @@ public class ModifyExpertInputValidator implements IInputValidator {
 	}
 	
 	public ModifyExpertInputValidator(Expert parent, ProblemElementsSet elementSet, String id) {
-		_parentOfModifyExpert = parent;
+		//_parentOfModifyExpert = parent;
 		_elementSet = elementSet;
 		_id = id;
 		
 		_brothers = new LinkedList<Expert>();
 		
-		if(_parentOfModifyExpert != null) {
+		/*if(_parentOfModifyExpert != null) {
 			_brothers = _parentOfModifyExpert.getChildrens();
 		} else {
 			_brothers = _elementSet.getExperts();
-		}
+		}*/
+		
+		_brothers = _elementSet.getExperts();
 	}
 	
 	

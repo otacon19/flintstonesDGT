@@ -145,11 +145,12 @@ public class ElementValuationsView extends ViewPart implements ISelectionListene
 					List<Expert> aux = new LinkedList<Expert>(nextLevelExperts);
 					nextLevelExperts = new LinkedList<Expert>();
 					for(Expert expert : aux) {
-						if(expert.hasChildrens()) {
+						/*if(expert.hasChildrens()) {
 							nextLevelExperts.addAll(expert.getChildrens());
 						} else {
 							toDisplay.add(expert);
-						}
+						}*/
+						toDisplay.add(expert);
 					}
 				} while (!nextLevelExperts.isEmpty());
 			} else if(_selectedElement instanceof Alternative) {
@@ -162,11 +163,7 @@ public class ElementValuationsView extends ViewPart implements ISelectionListene
 					List<Criterion> aux = new LinkedList<Criterion>(nextLevelCriteria);
 					nextLevelCriteria = new LinkedList<Criterion>();
 					for(Criterion criterion : aux) {
-						if (criterion.hasSubcriteria()) {
-							nextLevelCriteria.addAll(criterion.getSubcriteria());
-						} else {
-							toDisplay.add(criterion);
-						}
+						toDisplay.add(criterion);
 					}
 				} while (!nextLevelCriteria.isEmpty());
 
@@ -263,84 +260,18 @@ public class ElementValuationsView extends ViewPart implements ISelectionListene
 			setModel();
 		}
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	@Override
 	public void notifyCriteriaChange(CriteriaChangeEvent event) {
-		Criterion criterion;
-		List<Criterion> criteria;
+		switch(event.getChange()) {
+		case MODIFY_CRITERION:
+			if(_selectedElement == event.getNewValue()) {
+				setModel();
+			}
+			break;
 		
-		switch (event.getChange()) {
-			case ADD_CRITERION:
-				criterion = (Criterion) event.getNewValue();
-				while(criterion.getParent() != null) {
-					criterion = criterion.getParent();
-					if(_selectedElement == criterion) {
-						setModel();
-					}
-				}
-				break;
-			case REMOVE_CRITERION:
-				criterion = (Criterion) event.getOldValue();
-				while(criterion.getParent() != null) {
-					criterion = criterion.getParent();
-					if(_selectedElement == criterion) {
-						setModel();
-					}
-				}
-				break;
-			case ADD_CRITERIA:
-				criteria = (List<Criterion>) event.getNewValue();
-				for(Criterion c : criteria) {
-					while(c.getParent() != null) {
-						c = c.getParent();
-						if (_selectedElement == c) {
-							setModel();
-						}
-					}
-				}
-				break;
-			case REMOVE_CRITERIA:
-				criteria = (List<Criterion>) event.getOldValue();
-				for(Criterion c : criteria) {
-					while(c.getParent() != null) {
-						c = c.getParent();
-						if(_selectedElement == c) {
-							setModel();
-						}
-					}
-				}
-				break;
-			case MOVE_CRITERION:
-				criterion = (Criterion) event.getNewValue();
-				while(criterion.getParent() != null) {
-					criterion = criterion.getParent();
-					if(_selectedElement == criterion) {
-						setModel();
-					}
-				}
-				criterion = (Criterion) event.getOldValue();
-				if(criterion != null) {
-					while(criterion.getParent() != null) {
-						criterion = criterion.getParent();
-						if(_selectedElement == criterion) {
-							setModel();
-						}
-					}
-				}
-				break;
-	
-			case MODIFY_CRITERION:
-				criterion = (Criterion) event.getNewValue();
-				while(criterion.getParent() != null) {
-					criterion = criterion.getParent();
-					if(_selectedElement == criterion) {
-						setModel();
-					}
-				}
-				break;
-	
-			default:
+		default:
+
 		}
 
 	}
@@ -354,71 +285,71 @@ public class ElementValuationsView extends ViewPart implements ISelectionListene
 		switch(event.getChange()) {
 			case ADD_EXPERT:
 				expert = (Expert) event.getNewValue();
-				while(expert.getParent() != null) {
-					expert = expert.getParent();
+				//while(expert.getParent() != null) {
+					//expert = expert.getParent();
 					if(_selectedElement == expert) {
 						setModel();
 					}
-				}
+				//}
 				break;
 			case REMOVE_EXPERT:
 				expert = (Expert) event.getOldValue();
-				while(expert.getParent() != null) {
-					expert = expert.getParent();
+				//while(expert.getParent() != null) {
+					//expert = expert.getParent();
 					if(_selectedElement == expert) {
 						setModel();
 					}
-				}
+				//}
 				break;
 			case ADD_MULTIPLE_EXPERTS:
 				experts = (List<Expert>) event.getNewValue();
 				for(Expert e : experts) {
-					while(e.getParent() != null) {
-						e = e.getParent();
+					//while(e.getParent() != null) {
+						//e = e.getParent();
 						if(_selectedElement == e) {
 							setModel();
 						}
-					}
+					//}
 				}
 				break;
 			case REMOVE_MULTIPLE_EXPERTS:
 				experts = (List<Expert>) event.getOldValue();
 				for(Expert e : experts) {
-					while(e.getParent() != null) {
-						e = e.getParent();
+					//while(e.getParent() != null) {
+						//e = e.getParent();
 						if(_selectedElement == e) {
 							setModel();
 						}
-					}
+					//}
 				}
 				break;
 			case MOVE_EXPERT:
 				expert = (Expert) event.getNewValue();
-				while(expert.getParent() != null) {
-					expert = expert.getParent();
+				//while(expert.getParent() != null) {
+					//expert = expert.getParent();
 					if(_selectedElement == expert) {
 						setModel();
 					}
-				}
+				//}
 				expert = (Expert) event.getOldValue();
 				if(expert != null) {
-					while(expert.getParent() != null) {
-						expert = expert.getParent();
+					//while(expert.getParent() != null) {
+						//expert = expert.getParent();
 						if(_selectedElement == expert) {
 							setModel();
 						}
-					}
+					//}
 				}
 				break;
 	
 			case MODIFY_EXPERT:
 				expert = (Expert) event.getNewValue();
-				while(expert.getParent() != null) {
-					expert = expert.getParent();
+				//while(expert.getParent() != null) {
+					//expert = expert.getParent();
 					if(_selectedElement == expert) {
 						setModel();
 					}
-				}
+				//}
 	
 			default:
 		}

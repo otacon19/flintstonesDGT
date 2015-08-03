@@ -41,7 +41,7 @@ public class ModifyExpertHandler extends AbstractHandler {
 			IStructuredSelection selection = (IStructuredSelection) HandlerUtil.getCurrentSelectionChecked(event);
 			expert = (Expert) selection.getFirstElement();
 		}
-			Expert parent = expert.getParent();
+			//Expert parent = expert.getParent();
 		
 		
 		boolean doit = true;
@@ -49,7 +49,7 @@ public class ModifyExpertHandler extends AbstractHandler {
 		String newId = null;
 		
 		InputDialog dialog = new InputDialog(Display.getCurrent().getActiveShell(), Messages.ModifyExpertHandler_Modify_expert, 
-				Messages.ModifyExpertHandler_Insert_expert_id, expert.getId(), new ModifyExpertInputValidator(parent, elementSet, oldId));
+				Messages.ModifyExpertHandler_Insert_expert_id, expert.getId(), new ModifyExpertInputValidator(/*parent*/expert, elementSet, oldId));
 		
 		if(dialog.open() == Window.OK) {
 			newId = dialog.getValue();

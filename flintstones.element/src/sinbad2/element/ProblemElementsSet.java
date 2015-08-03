@@ -88,12 +88,15 @@ public class ProblemElementsSet implements Cloneable {
 		
 	}
 
-	public void addExpert(Expert expert, boolean hasParent, boolean inUndoRedo) {
+	public void addExpert(Expert expert, /*boolean hasParent,*/ boolean inUndoRedo) {
 		
-		if(!hasParent) {
+		/*if(!hasParent) {
 			_experts.add(expert);
 			Collections.sort(_experts);
-		}
+		}*/
+		
+		_experts.add(expert);
+		Collections.sort(_experts);
 		
 		notifyExpertsChanges(new ExpertsChangeEvent(EExpertsChange.ADD_EXPERT, null, expert, inUndoRedo));
 		
@@ -108,18 +111,16 @@ public class ProblemElementsSet implements Cloneable {
 		
 	}
 	
-	public void addCriterion(Criterion criterion, boolean hasParent, boolean inUndoRedo) {
+	public void addCriterion(Criterion criterion, boolean inUndoRedo) {
 		
-		if(!hasParent) {
-			_criteria.add(criterion);
-			Collections.sort(_criteria);
-		}
+		_criteria.add(criterion);
+		Collections.sort(_criteria);
 		
 		notifyCriteriaChanges(new CriteriaChangeEvent(ECriteriaChange.ADD_CRITERION, null, criterion, inUndoRedo));
 		
 	}
 	
-	public void moveExpert(Expert moveExpert, Expert newParent, Expert oldParent, boolean inUndoRedo) {
+	/*public void moveExpert(Expert moveExpert, Expert newParent, Expert oldParent, boolean inUndoRedo) {
 		
 		if(oldParent == null) {
 			_experts.remove(moveExpert);
@@ -134,34 +135,18 @@ public class ProblemElementsSet implements Cloneable {
 		}
 		
 		notifyExpertsChanges(new ExpertsChangeEvent(EExpertsChange.MOVE_EXPERT, oldParent, moveExpert, inUndoRedo));
-	}
+	}*/
 	
-	public void moveCriterion(Criterion moveCriterion, Criterion newParent, Criterion oldParent, boolean inUndoRedo) {
-		
-		if(oldParent == null) {
-			_criteria.remove(moveCriterion);
-			newParent.addSubcriterion(moveCriterion);
-		} else {
-			oldParent.removeSubcriterion(moveCriterion);
-			if(newParent == null) {
-				addCriterion(moveCriterion, false, inUndoRedo);
-			} else {
-				newParent.addSubcriterion(moveCriterion);
-			}
-		}
-		
-		notifyCriteriaChanges(new CriteriaChangeEvent(ECriteriaChange.MOVE_CRITERION, oldParent, moveCriterion, inUndoRedo));
-	}
-	
-	public void addMultipleExperts(List<Expert> insertExperts, boolean hasParent, boolean inUndoRedo) {
-		Expert parent = insertExperts.get(0).getParent();
+	public void addMultipleExperts(List<Expert> insertExperts, /*boolean hasParent,*/ boolean inUndoRedo) {
+		//Expert parent = insertExperts.get(0).getParent();
 		
 		for(Expert expert: insertExperts) {	
-			if(!hasParent) {
+			/*if(!hasParent) {
 				_experts.add(expert);
 			} else {
 				parent.addChildren(expert);
-			}
+			}*/
+			_experts.add(expert);
 		}
 		
 		notifyExpertsChanges(new ExpertsChangeEvent(EExpertsChange.REMOVE_MULTIPLE_EXPERTS, null, insertExperts, inUndoRedo));
@@ -182,15 +167,10 @@ public class ProblemElementsSet implements Cloneable {
 		
 	}
 	
-	public void addMultipleCriteria(List<Criterion> insertCriteria, boolean hasParent, boolean inUndoRedo) {
-		Criterion parent = insertCriteria.get(0).getParent();
+	public void addMultipleCriteria(List<Criterion> insertCriteria, boolean inUndoRedo) {
 		
 		for(Criterion criterion: insertCriteria) {	
-			if(!hasParent) {
-				_criteria.add(criterion);
-			} else {
-				parent.addSubcriterion(criterion);
-			}
+			_criteria.add(criterion);
 		}
 		
 		
@@ -198,12 +178,15 @@ public class ProblemElementsSet implements Cloneable {
 		
 	}
 	
-	public void removeExpert(Expert expert, boolean hasParent, boolean inUndoRedo) {
+	public void removeExpert(Expert expert, /*boolean hasParent,*/ boolean inUndoRedo) {
 		
-		if(!hasParent) {
+		/*if(!hasParent) {
 			_experts.remove(expert);
 			Collections.sort(_experts);
-		}
+		}*/
+		
+		_experts.remove(expert);
+		Collections.sort(_experts);
 		
 		notifyExpertsChanges(new ExpertsChangeEvent(EExpertsChange.REMOVE_EXPERT, expert, null, inUndoRedo));
 		
@@ -218,26 +201,25 @@ public class ProblemElementsSet implements Cloneable {
 		
 	}
 	
-	public void removeCriterion(Criterion criterion, boolean hasParent, boolean inUndoRedo) {
+	public void removeCriterion(Criterion criterion, boolean inUndoRedo) {
 		
-		if(!hasParent) {
-			_criteria.remove(criterion);
-			Collections.sort(_criteria);
-		}
+		_criteria.remove(criterion);
+		Collections.sort(_criteria);
 		
 		notifyCriteriaChanges(new CriteriaChangeEvent(ECriteriaChange.REMOVE_CRITERION, criterion, null, inUndoRedo));
 	}
 	
-	public void removeMultipleExperts(List<Expert> removeExperts, boolean hasParent, boolean inUndoRedo) {
-		Expert parent = removeExperts.get(0).getParent();
+	public void removeMultipleExperts(List<Expert> removeExperts, /*boolean hasParent,*/ boolean inUndoRedo) {
+		//Expert parent = removeExperts.get(0).getParent();
 		
 		for(Expert expert: removeExperts) {	
-			if(!hasParent) {
+			/*if(!hasParent) {
 				_experts.remove(expert);
 			} else {
 				parent.removeChildren(expert);
 				expert.setParent(parent);
-			}
+			}*/
+			_experts.remove(expert);
 		}
 		
 		notifyExpertsChanges(new ExpertsChangeEvent(EExpertsChange.REMOVE_MULTIPLE_EXPERTS, removeExperts, null, inUndoRedo));
@@ -258,16 +240,10 @@ public class ProblemElementsSet implements Cloneable {
 	
 	}
 	
-	public void removeMultipleCriteria(List<Criterion> removeCriteria, boolean hasParent, boolean inUndoRedo) {
-		Criterion parent = removeCriteria.get(0).getParent();
+	public void removeMultipleCriteria(List<Criterion> removeCriteria, boolean inUndoRedo) {
 		
 		for(Criterion criterion: removeCriteria) {
-			if(!hasParent) {
-				_criteria.remove(criterion);
-			} else {
-				parent.removeSubcriterion(criterion);
-				criterion.setParent(parent);
-			}
+			_criteria.remove(criterion);
 		}
 		
 		notifyCriteriaChanges(new CriteriaChangeEvent(ECriteriaChange.REMOVE_CRITERIA, removeCriteria, null, inUndoRedo));
@@ -294,10 +270,9 @@ public class ProblemElementsSet implements Cloneable {
 		
 	}
 	
-	public void modifyCriterion(Criterion modifyCriterion, String id, boolean newCost, boolean inUndoRedo) {
+	public void modifyCriterion(Criterion modifyCriterion, String id, boolean inUndoRedo) {
 		Criterion oldCriterion = (Criterion) modifyCriterion.clone();
 		modifyCriterion.setId(id);
-		modifyCriterion.setCost(newCost);
 		
 		notifyCriteriaChanges(new CriteriaChangeEvent(ECriteriaChange.MODIFY_CRITERION, oldCriterion, modifyCriterion, inUndoRedo));
 	}
@@ -399,7 +374,7 @@ public class ProblemElementsSet implements Cloneable {
 		XMLEvent event;
 		String id;
 		Expert expert = null;
-		Expert parent = null;
+		//Expert parent = null;
 		boolean end = false;
 		while (reader.hasNext() && !end) {
 			event = reader.next();
@@ -408,18 +383,19 @@ public class ProblemElementsSet implements Cloneable {
 				if ("expert".equals(reader.getStartElementLocalPart())) { //$NON-NLS-1$
 					id = reader.getStartElementAttribute("id"); //$NON-NLS-1$
 					expert = new Expert(id);
-					if (parent == null) {
+					/*if (parent == null) {
 						_experts.add(expert);
 						parent = expert;
 					} else {
 						parent.addChildren(expert);
 						parent = expert;
-					}
+					}*/
+					_experts.add(expert);
 				}
 			} else if (event.isEndElement()) {
 				if ("expert".equals(reader.getEndElementLocalPart())) { //$NON-NLS-1$
-					parent = expert.getParent();
-					expert = parent;
+					//parent = expert.getParent();
+					//expert = parent;
 				} else if ("experts".equals(reader.getEndElementLocalPart())) { //$NON-NLS-1$
 					end = true;
 					Collections.sort(_experts);
@@ -455,9 +431,7 @@ public class ProblemElementsSet implements Cloneable {
 
 		XMLEvent event;
 		String id;
-		Boolean cost;
 		Criterion criterion = null;
-		Criterion parent = null;
 		boolean end = false;
 		while (reader.hasNext() && !end) {
 			event = reader.next();
@@ -465,27 +439,11 @@ public class ProblemElementsSet implements Cloneable {
 			if (event.isStartElement()) {
 				if ("criterion".equals(reader.getStartElementLocalPart())) { //$NON-NLS-1$
 					id = reader.getStartElementAttribute("id"); //$NON-NLS-1$
-					cost = Boolean.parseBoolean(reader
-							.getStartElementAttribute("cost")); //$NON-NLS-1$
-
 					criterion = new Criterion(id);
-					if (cost != null) {
-						criterion.setCost(cost);
-					}
-
-					if (parent == null) {
-						_criteria.add(criterion);
-						parent = criterion;
-					} else {
-						parent.addSubcriterion(criterion);
-						parent = criterion;
-					}
+					_criteria.add(criterion);
 				}
 			} else if (event.isEndElement()) {
-				if ("criterion".equals(reader.getEndElementLocalPart())) { //$NON-NLS-1$
-					parent = criterion.getParent();
-					criterion = parent;
-				} else if ("criteria".equals(reader.getEndElementLocalPart())) { //$NON-NLS-1$
+				if ("criteria".equals(reader.getEndElementLocalPart())) { //$NON-NLS-1$
 					end = true;
 					Collections.sort(_criteria);
 				}
@@ -555,9 +513,9 @@ public class ProblemElementsSet implements Cloneable {
 		for (Expert expert : experts) {
 			writer.writeStartElement("expert"); //$NON-NLS-1$
 			writer.writeAttribute("id", expert.getId()); //$NON-NLS-1$
-			if (expert.hasChildrens()) {
+			/*if (expert.hasChildrens()) {
 				saveExperts(expert.getChildrens(), writer);
-			}
+			}*/
 			writer.writeEndElement();
 		}
 	}
@@ -576,10 +534,6 @@ public class ProblemElementsSet implements Cloneable {
 		for (Criterion criterion : criteria) {
 			writer.writeStartElement("criterion"); //$NON-NLS-1$
 			writer.writeAttribute("id", criterion.getId()); //$NON-NLS-1$
-			writer.writeAttribute("cost", Boolean.toString(criterion.getCost())); //$NON-NLS-1$
-			if (criterion.hasSubcriteria()) {
-				saveCriteria(criterion.getSubcriteria(), writer);
-			}
 			writer.writeEndElement();
 		}
 	}

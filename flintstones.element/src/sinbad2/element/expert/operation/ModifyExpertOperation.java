@@ -32,13 +32,15 @@ public class ModifyExpertOperation extends UndoableOperation {
 		
 		_childrensOrOthers = new LinkedList<Expert>();
 		
-		Expert parent = _modifyExpert.getParent();
+		//Expert parent = _modifyExpert.getParent();
 		
-		if(parent != null) {
+		/*if(parent != null) {
 			_childrensOrOthers = parent.getChildrens();
 		} else {
 			_childrensOrOthers = elementSet.getExperts();
-		}
+		}*/
+		
+		_childrensOrOthers = elementSet.getExperts();
 	}
 
 	@Override

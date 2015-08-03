@@ -105,10 +105,10 @@ public class NewValuationOperation extends UndoableOperation {
 				setValuation(e, alternative, criterion, valuation);
 			}
 			doit = false;
-		} else if(expert.hasChildrens()) {
+		/*} else if(expert.hasChildrens()) {
 			for(Expert e: expert.getChildrens()) {
 				setValuation(e, alternative, criterion, valuation);
-			}
+			}*/
 			doit = false;
 		} else if(alternative == null) {
 			for(Alternative a: _elementSet.getAlternatives()) {
@@ -117,11 +117,6 @@ public class NewValuationOperation extends UndoableOperation {
 			doit = false;
 		} else if(criterion == null) {
 			for(Criterion c: _elementSet.getCriteria()) {
-				setValuation(expert, alternative, c, valuation);
-			}
-			doit = false;
-		} else if(criterion.hasSubcriteria()) {
-			for(Criterion c: criterion.getSubcriteria()) {
 				setValuation(expert, alternative, c, valuation);
 			}
 			doit = false;

@@ -158,8 +158,8 @@ public class RemoveDomainAssignmentsOperationProvider {
 	private boolean expertsContains(Expert expert) {
 		if (_experts.contains(expert)) {
 			return true;
-		} else if (expert.getParent() != null) {
-			return expertsContains(expert.getParent());
+		/*} else if (expert.getParent() != null) {
+			return expertsContains(expert.getParent());*/
 		} else {
 			return false;
 		}
@@ -168,8 +168,6 @@ public class RemoveDomainAssignmentsOperationProvider {
 	private boolean criteriaContains(Criterion criterion) {
 		if (_criteria.contains(criterion)) {
 			return true;
-		} else if (criterion.getParent() != null) {
-			return criteriaContains(criterion.getParent());
 		} else {
 			return false;
 		}

@@ -42,8 +42,6 @@ public class AddCriterionHandler extends AbstractHandler {
 		
 		if(dialog.open() == Window.OK) {
 			id = dialog.getValue();
-			cost = dialog.isCost();
-			parent = dialog.isSubcriterion() ? parent : null;
 		} else {
 			doit = false;
 		}

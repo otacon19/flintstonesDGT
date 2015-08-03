@@ -1,22 +1,22 @@
 package sinbad2.element.ui.draganddrop;
 
-import java.util.List;
+//import java.util.List;
 
-import org.eclipse.core.commands.ExecutionException;
+//import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerDropAdapter;
 import org.eclipse.swt.dnd.TransferData;
 
-import sinbad2.element.ProblemElementsManager;
+/*import sinbad2.element.ProblemElementsManager;
 import sinbad2.element.ProblemElementsSet;
 import sinbad2.element.expert.Expert;
-import sinbad2.element.expert.handler.move.MoveExpertHandler;
+import sinbad2.element.expert.handler.move.MoveExpertHandler;*/
 
 public class ExpertsDropListener extends ViewerDropAdapter {
 	
-	private Expert _expert;
+	/*private Expert _expert;
 	private Expert _newParent;
-	private Expert _oldParent;
+	private Expert _oldParent;*/
 	
 	public ExpertsDropListener(Viewer viewer) {
 		super(viewer);
@@ -24,20 +24,22 @@ public class ExpertsDropListener extends ViewerDropAdapter {
 
 	@Override
 	public boolean performDrop(Object data) {
-		MoveExpertHandler handler = new MoveExpertHandler(_expert, _newParent);
+		/*MoveExpertHandler handler = new MoveExpertHandler(_expert, _newParent);
 		try {
 			handler.execute(null);
 		} catch (ExecutionException e) {
 			return false;
 		}
-		return true;
+		return true;*/
+		
+		return false;
 	}
 
 	@Override
 	public boolean validateDrop(Object target, int operation, TransferData transferType) {
 		boolean result = false;
 		
-		Object selectedObject = getSelectedObject();
+		/*Object selectedObject = getSelectedObject();
 
 		if(selectedObject instanceof Expert) {
 			_expert = (Expert) selectedObject;
@@ -48,12 +50,12 @@ public class ExpertsDropListener extends ViewerDropAdapter {
 			
 			result = checkDropExpert();
 			
-		}
+		}*/
 		
 		return result;
 	}
 	
-	private boolean checkDropExpert() {
+	/*private boolean checkDropExpert() {
 		ProblemElementsManager elementManager = ProblemElementsManager.getInstance();
 		ProblemElementsSet elementSet = elementManager.getActiveElementSet();
 		
@@ -71,9 +73,11 @@ public class ExpertsDropListener extends ViewerDropAdapter {
 			}
 		}
 		
-	}
+		return false;
+		
+	}*/
 	
-	private boolean isMember(Expert expert, Expert maybeMember) {
+	/*private boolean isMember(Expert expert, Expert maybeMember) {
 		
 		if(expert.hasChildrens()) {
 			for(Expert member: expert.getChildrens()) {
@@ -88,9 +92,9 @@ public class ExpertsDropListener extends ViewerDropAdapter {
 		}
 		
 		return false;
-	}
+	}*/
 
-	private boolean duplicateID(List<Expert> experts, String id) {
+	/*private boolean duplicateID(List<Expert> experts, String id) {
 
 		if(experts != null) {
 			for(Expert e: experts) {
@@ -101,7 +105,7 @@ public class ExpertsDropListener extends ViewerDropAdapter {
 		}
 		
 		return false;
-	}
+	}*/
 	
 
 }

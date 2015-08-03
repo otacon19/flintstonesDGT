@@ -14,20 +14,15 @@ public class AddCriterionOperation extends UndoableOperation {
 	
 	private ProblemElementsSet _elementSet;
 	private Criterion _addCriterion;
-	private Criterion _parent;
 	private String _id;
-	private boolean _cost;
 
 	public AddCriterionOperation(String label, String id, boolean cost, Criterion parent, ProblemElementsSet elementSet) {
 		super(label);
 		
 		_elementSet = elementSet;
 		_id = id;
-		_cost = cost;
-		_parent = parent;
 		
 		_addCriterion = new Criterion(_id);
-		_addCriterion.setCost(_cost);
 	}
 
 	@Override
@@ -37,31 +32,16 @@ public class AddCriterionOperation extends UndoableOperation {
 
 	@Override
 	public IStatus redo(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-		boolean hasParent = false;
 		
-		if(_parent == null) {
-			_elementSet.addCriterion(_addCriterion, hasParent, _inUndoRedo);
-		} else {
-			hasParent = true;
-			_parent.addSubcriterion(_addCriterion);
-			_elementSet.addCriterion(_addCriterion, hasParent, _inUndoRedo);
-		}
+		_elementSet.addCriterion(_addCriterion, _inUndoRedo);
 
 		return Status.OK_STATUS;
 	}
 
 	@Override
 	public IStatus undo(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-		boolean hasParent = false;
 		
-		if(_parent == null) {
-			_elementSet.removeCriterion(_addCriterion, hasParent, _inUndoRedo);
-		} else {
-			hasParent = true;
-			_parent.removeSubcriterion(_addCriterion);
-			_addCriterion.setParent(_parent);
-			_elementSet.removeCriterion(_addCriterion, hasParent, _inUndoRedo);
-		}
+		_elementSet.removeCriterion(_addCriterion, _inUndoRedo);
 		
 		return Status.OK_STATUS;
 	}

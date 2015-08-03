@@ -197,13 +197,13 @@ public class ElementValuationsTableContentProvider extends KTableNoScrollModel i
 		_expertsDepth = 1;
 		List<Expert> nextLevelExperts = new LinkedList<Expert>(_experts);
 		do {
-			List<Expert> aux = new LinkedList<Expert>(nextLevelExperts);
+			//List<Expert> aux = new LinkedList<Expert>(nextLevelExperts);
 			nextLevelExperts = new LinkedList<Expert>();
-			for(Expert expert : aux) {
+			/*for(Expert expert : aux) {
 				if(expert.hasChildrens()) {
 					nextLevelExperts.addAll(expert.getChildrens());
 				}
-			}
+			}*/
 			if(!nextLevelExperts.isEmpty()) {
 				_expertsDepth++;
 			}
@@ -214,13 +214,7 @@ public class ElementValuationsTableContentProvider extends KTableNoScrollModel i
 		_criteriaDepth = 1;
 		List<Criterion> nextLevelCriteria = new LinkedList<Criterion>(_criteria);
 		do {
-			List<Criterion> aux = new LinkedList<Criterion>(nextLevelCriteria);
 			nextLevelCriteria = new LinkedList<Criterion>();
-			for(Criterion criterion : aux) {
-				if(criterion.hasSubcriteria()) {
-					nextLevelCriteria.addAll(criterion.getSubcriteria());
-				}
-			}
 			if(!nextLevelCriteria.isEmpty()) {
 				_criteriaDepth++;
 			}
@@ -250,23 +244,26 @@ public class ElementValuationsTableContentProvider extends KTableNoScrollModel i
 
 		List<Expert> result = new LinkedList<Expert>();
 
-		String index = _index.get(expert.getParent());
+		/*String index = _index.get(expert.getParent());
 		if(index == null) {
 			index = "E" + c; //$NON-NLS-1$
 		} else {
 			index += "." + c; //$NON-NLS-1$
-		}
+		}*/
+		String index = "E" + c; //$NON-NLS-1$
 		_index.put(expert, index);
 
-		int counter = 1;
-		if(expert.hasChildrens()) {
+		//int counter = 1;
+		/*if(expert.hasChildrens()) {
 			for(Expert e : expert.getChildrens()) {
 				result.addAll(extractExperts(e, counter++));
 			}
 		} else {
 			result.add(expert);
-		}
+		}*/
 
+		result.add(expert);
+		
 		return result;
 	}
 
@@ -274,22 +271,11 @@ public class ElementValuationsTableContentProvider extends KTableNoScrollModel i
 
 		List<Criterion> result = new LinkedList<Criterion>();
 
-		String index = _index.get(criterion.getParent());
-		if(index == null) {
-			index = "C" + c; //$NON-NLS-1$
-		} else {
-			index += "." + c; //$NON-NLS-1$
-		}
+		String index = "C" + c; //$NON-NLS-1$
 		_index.put(criterion, index);
 
-		int counter = 1;
-		if(criterion.hasSubcriteria()) {
-			for(Criterion cr : criterion.getSubcriteria()) {
-				result.addAll(extractCriteria(cr, counter++));
-			}
-		} else {
-			result.add(criterion);
-		}
+		result.add(criterion);
+
 		return result;
 	}
 
@@ -315,9 +301,9 @@ public class ElementValuationsTableContentProvider extends KTableNoScrollModel i
 			_finalCriteria.addAll(extractCriteria(criterion, counter++));
 		}
 
-		Expert expert, eParent;
+		Expert expert /*eParent*/;
 		Alternative alternative;
-		Criterion criterion, cParent;
+		Criterion criterion;
 		int col, row, elementDepth;
 		
 		if(_row.equals(EElement.EXPERT)) {
@@ -327,11 +313,11 @@ public class ElementValuationsTableContentProvider extends KTableNoScrollModel i
 				row = _fixedRows + i;
 				elementDepth = expert.getCanonicalId().split(">").length - 1; //$NON-NLS-1$
 				col = elementDepth;
-				eParent = expert;
-				while(eParent.getParent() != null) {
+				//eParent = expert;
+				/*while(eParent.getParent() != null) {
 					eParent = eParent.getParent();
 					_rowHeaderMatrix[--col][row] = eParent;
-				}
+				}*/
 				col = elementDepth;
 				while(col < _fixedCols) {
 					_rowHeaderMatrix[col++][row] = expert;
@@ -352,11 +338,6 @@ public class ElementValuationsTableContentProvider extends KTableNoScrollModel i
 				row = _fixedRows + i;
 				elementDepth = criterion.getCanonicalId().split(">").length - 1; //$NON-NLS-1$
 				col = elementDepth;
-				cParent = criterion;
-				while(cParent.getParent() != null) {
-					cParent = cParent.getParent();
-					_rowHeaderMatrix[--col][row] = cParent;
-				}
 				col = elementDepth;
 				while(col < _fixedCols) {
 					_rowHeaderMatrix[col++][row] = criterion;
@@ -371,11 +352,11 @@ public class ElementValuationsTableContentProvider extends KTableNoScrollModel i
 				col = _fixedCols + i;
 				elementDepth = expert.getCanonicalId().split(">").length - 1; //$NON-NLS-1$
 				row = elementDepth;
-				eParent = expert;
-				while(eParent.getParent() != null) {
+				//eParent = expert;
+				/*while(eParent.getParent() != null) {
 					eParent = eParent.getParent();
 					_colHeaderMatrix[col][--row] = eParent;
-				}
+				}*/
 				row = elementDepth;
 				while(row < _fixedRows) {
 					_colHeaderMatrix[col][row++] = expert;
@@ -397,11 +378,6 @@ public class ElementValuationsTableContentProvider extends KTableNoScrollModel i
 				col = _fixedCols + i;
 				elementDepth = criterion.getCanonicalId().split(">").length - 1; //$NON-NLS-1$
 				row = elementDepth;
-				cParent = criterion;
-				while (cParent.getParent() != null) {
-					cParent = cParent.getParent();
-					_colHeaderMatrix[col][--row] = cParent;
-				}
 				row = elementDepth;
 				while (row < _fixedRows) {
 					_colHeaderMatrix[col][row++] = criterion;

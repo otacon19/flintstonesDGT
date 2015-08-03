@@ -10,7 +10,6 @@ import sinbad2.element.ui.nls.Messages;
 
 public class ModifyCriterionInputValidator implements IInputValidator {
 	
-	private Criterion _parent;
 	private ProblemElementsSet _elementSet;
 	private String _id;
 	
@@ -18,8 +17,7 @@ public class ModifyCriterionInputValidator implements IInputValidator {
 		super();
 	}
 	
-	public ModifyCriterionInputValidator(Criterion parent, String id, ProblemElementsSet elementSet) {
-		_parent = parent;
+	public ModifyCriterionInputValidator(String id, ProblemElementsSet elementSet) {
 		_id = id;
 		_elementSet = elementSet;
 	}
@@ -31,11 +29,7 @@ public class ModifyCriterionInputValidator implements IInputValidator {
 		
 		List<Criterion> brothers_or_others = null;
 		
-		if(_parent != null) {
-			brothers_or_others = _parent.getSubcriteria();
-		} else {
-			brothers_or_others = _elementSet.getCriteria();
-		}
+		brothers_or_others = _elementSet.getCriteria();
 		
 		if(newText.equals(_id)) {
 			return null;
