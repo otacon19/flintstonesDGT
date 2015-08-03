@@ -1,6 +1,7 @@
 package sinbad2.element.ui.view.criteria;
 
 
+
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.DoubleClickEvent;
@@ -8,8 +9,8 @@ import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
-import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.jface.viewers.TreeViewerColumn;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.FocusListener;
@@ -17,7 +18,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.TreeColumn;
+import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.contexts.IContextActivation;
 import org.eclipse.ui.contexts.IContextService;
@@ -25,9 +26,8 @@ import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.services.ISourceProviderService;
 
 import sinbad2.element.criterion.Criterion;
-import sinbad2.element.ui.Images;
+
 import sinbad2.element.ui.handler.criterion.modify.ModifyCriterionHandler;
-import sinbad2.element.ui.nls.Messages;
 import sinbad2.element.ui.sourceprovider.criteria.BrothersCriteriaSelectedSourceProvider;
 import sinbad2.element.ui.view.criteria.provider.CriteriaContentProvider;
 import sinbad2.element.ui.view.criteria.provider.CriterionIdLabelProvider;
@@ -39,7 +39,7 @@ public class CriteriaView extends ViewPart {
 	
 	private static final IContextService _contextService = (IContextService) PlatformUI.getWorkbench().getService(IContextService.class);
 	
-	private TreeViewer _treeViewer;
+	private TableViewer _tableViewer;
 	
 	private CriteriaContentProvider _provider;
 	
@@ -47,9 +47,9 @@ public class CriteriaView extends ViewPart {
 	
 	@Override
 	public void createPartControl(Composite parent) {
-		_treeViewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER | SWT.FULL_SELECTION);
+		_tableViewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER | SWT.FULL_SELECTION);
 		
-		_treeViewer.getTree().addListener(SWT.MeasureItem, new Listener() {
+		_tableViewer.getTable().addListener(SWT.MeasureItem, new Listener() {
 			
 			@Override
 			public void handleEvent(Event event) {
@@ -58,8 +58,8 @@ public class CriteriaView extends ViewPart {
 			}
 		});
 		
-		_provider = new CriteriaContentProvider(_treeViewer);
-		_treeViewer.setContentProvider(_provider);
+		_provider = new CriteriaContentProvider(_tableViewer);
+		_tableViewer.setContentProvider(_provider);
 		
 		addColumns();
 		hookContextMenu();
@@ -67,30 +67,27 @@ public class CriteriaView extends ViewPart {
 		hookSelectionChangedListener();
 		hookDoubleClickListener();
 		
-		_treeViewer.setInput(_provider.getInput());
-		getSite().setSelectionProvider(_treeViewer);
+		_tableViewer.setInput(_provider.getInput());
+		getSite().setSelectionProvider(_tableViewer);
 	}
 
 	private void addColumns() {
-		TreeViewerColumn tvc = new TreeViewerColumn(_treeViewer, SWT.NONE);
+		TableViewerColumn tvc = new TableViewerColumn(_tableViewer, SWT.NONE);
 		tvc.setLabelProvider(new CriterionIdLabelProvider());
-		TreeColumn tc = tvc.getColumn();
-		tc.setMoveable(true);
+		TableColumn tc = tvc.getColumn();
 		tc.setResizable(false);
-		tc.setText(Messages.CriteriaView_Criteria);
-		tc.setImage(Images.Criterion);
-		tc.pack();			
+		tc.pack();
 	}
 	
 	private void hookContextMenu() {
 		MenuManager menuManager = new MenuManager();
-		Menu menu = menuManager.createContextMenu(_treeViewer.getTree());
-		_treeViewer.getTree().setMenu(menu);
-		getSite().registerContextMenu(menuManager, _treeViewer);
+		Menu menu = menuManager.createContextMenu(_tableViewer.getTable());
+		_tableViewer.getTable().setMenu(menu);
+		getSite().registerContextMenu(menuManager, _tableViewer);
 	}
 	
 	private void hookDoubleClickListener() {
-		_treeViewer.addDoubleClickListener(new IDoubleClickListener() {
+		_tableViewer.addDoubleClickListener(new IDoubleClickListener() {
 			
 			@Override
 			public void doubleClick(DoubleClickEvent event) {
@@ -110,7 +107,7 @@ public class CriteriaView extends ViewPart {
 	}
 	
 	private void hookSelectionChangedListener() {
-		_treeViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+		_tableViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			
 			private ISourceProviderService sourceProviderService = (ISourceProviderService) getSite()
 					.getService(ISourceProviderService.class);
@@ -135,7 +132,7 @@ public class CriteriaView extends ViewPart {
 	}
 
 	private void hookFocusListener() {
-		_treeViewer.getControl().addFocusListener(new FocusListener() {
+		_tableViewer.getControl().addFocusListener(new FocusListener() {
 			
 			private IContextActivation activation = null;
 			
@@ -155,7 +152,7 @@ public class CriteriaView extends ViewPart {
 	
 	@Override
 	public void setFocus() {
-		_treeViewer.getControl().setFocus();
+		_tableViewer.getControl().setFocus();
 		
 	}
 

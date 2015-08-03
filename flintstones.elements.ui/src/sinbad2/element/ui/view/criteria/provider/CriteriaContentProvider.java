@@ -2,12 +2,10 @@ package sinbad2.element.ui.view.criteria.provider;
 
 import java.util.List;
 
-import org.eclipse.jface.viewers.ITreeContentProvider;
-import org.eclipse.jface.viewers.ITreeViewerListener;
-import org.eclipse.jface.viewers.TreeExpansionEvent;
-import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.IStructuredContentProvider;
+import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.TableColumn;
 
 import sinbad2.element.IProblemElementsSetChangeListener;
 import sinbad2.element.ProblemElementsManager;
@@ -16,21 +14,20 @@ import sinbad2.element.criterion.Criterion;
 import sinbad2.element.criterion.listener.CriteriaChangeEvent;
 import sinbad2.element.criterion.listener.ICriteriaChangeListener;
 
-public class CriteriaContentProvider implements ITreeContentProvider, ICriteriaChangeListener, IProblemElementsSetChangeListener {
+public class CriteriaContentProvider implements IStructuredContentProvider, ICriteriaChangeListener, IProblemElementsSetChangeListener {
 
 	private ProblemElementsManager _elementManager;
 	private ProblemElementsSet _elementSet;
 	private List<Criterion> _criteria;
-	private TreeViewer _treeViewer;
+	private TableViewer _tableViewer;
 	
 	public CriteriaContentProvider() {
 		_criteria = null;
 	}
 	
-	public CriteriaContentProvider(TreeViewer treeViewer) {
+	public CriteriaContentProvider(TableViewer tableViewer) {
 		this();
-		_treeViewer = treeViewer;
-		hookTreeListener();
+		_tableViewer = tableViewer;
 		
 		_elementManager = ProblemElementsManager.getInstance();
 		_elementSet = _elementManager.getActiveElementSet();
@@ -38,37 +35,6 @@ public class CriteriaContentProvider implements ITreeContentProvider, ICriteriaC
 		
 		_elementSet.registerCriteriaChangesListener(this);
 		_elementManager.registerElementsSetChangeListener(this);
-	}
-	
-	private void hookTreeListener() {
-		_treeViewer.addTreeListener(new ITreeViewerListener() {
-			
-			@Override
-			public void treeExpanded(TreeExpansionEvent event) {
-				Display.getCurrent().asyncExec(new Runnable() {
-					
-					@Override
-					public void run() {
-						packViewer();
-						
-					}
-				});
-				
-			}
-			
-			@Override
-			public void treeCollapsed(TreeExpansionEvent event) {
-				Display.getCurrent().asyncExec(new Runnable() {
-					
-					@Override
-					public void run() {
-						packViewer();
-						
-					}
-				});
-				
-			}
-		});
 	}
 	
 	@Override
@@ -86,21 +52,6 @@ public class CriteriaContentProvider implements ITreeContentProvider, ICriteriaC
 	public Object[] getElements(Object inputElement) {
 		return ((List<Criterion>) inputElement).toArray();
 	}
-
-	@Override
-	public Object[] getChildren(Object parentElement) {
-		return null;
-	}
-
-	@Override
-	public Object getParent(Object element) {
-		return null;
-	}
-
-	@Override
-	public boolean hasChildren(Object element) {
-		return false;
-	}
 	
 	public Object getInput() {
 		return _criteria;
@@ -113,7 +64,7 @@ public class CriteriaContentProvider implements ITreeContentProvider, ICriteriaC
 		switch(event.getChange()) {
 			case CRITERIA_CHANGES:
 				_criteria = (List<Criterion>) event.getNewValue();
-				_treeViewer.setInput(_criteria);
+				_tableViewer.setInput(_criteria);
 				break;
 			case ADD_CRITERION:
 				addCriterion((Criterion) event.getNewValue());
@@ -132,10 +83,7 @@ public class CriteriaContentProvider implements ITreeContentProvider, ICriteriaC
 				}
 				break;
 			case MODIFY_CRITERION:
-				modifyCriterion((Criterion) event.getNewValue());
-				break;
-			case MOVE_CRITERION:
-				_treeViewer.refresh();
+				_tableViewer.refresh();
 				break;
 		}
 		
@@ -145,6 +93,7 @@ public class CriteriaContentProvider implements ITreeContentProvider, ICriteriaC
 	private void addCriterion(Criterion criterion) {
 		int pos = 0;
 		boolean find = false;
+		
 		do {
 			if(_criteria.get(pos) == criterion) {
 				find = true;
@@ -152,25 +101,18 @@ public class CriteriaContentProvider implements ITreeContentProvider, ICriteriaC
 				pos++;
 			}
 		} while (!find);
-		_treeViewer.insert(_treeViewer.getInput(), criterion, pos);
+		_tableViewer.insert(criterion, pos);
 		
 	}
 	
 	private void removeCriterion(Criterion criterion) {
-		_treeViewer.refresh();
-		
-	}
-	
-	private void modifyCriterion(Criterion criterion) {
-		Object[] expandedElements = _treeViewer.getExpandedElements();
-		_treeViewer.refresh();
-		_treeViewer.setExpandedElements(expandedElements);
+		_tableViewer.refresh();
 		
 	}
 	
 	private void packViewer() {
-		for(int i = 0; i < _treeViewer.getTree().getColumns().length - 1; ++i ) {
-			 _treeViewer.getTree().getColumn(i).pack();
+		for(TableColumn column: _tableViewer.getTable().getColumns()) {
+			column.pack();
 		}
 	}
 
@@ -182,7 +124,7 @@ public class CriteriaContentProvider implements ITreeContentProvider, ICriteriaC
 			_elementSet = elementSet;
 			_criteria = _elementSet.getCriteria();
 			_elementSet.registerCriteriaChangesListener(this);
-			_treeViewer.setInput(_criteria);
+			_tableViewer.setInput(_criteria);
 		}
 		
 	}

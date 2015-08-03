@@ -243,12 +243,6 @@ public class DomainAssignments implements Cloneable, IExpertsChangeListener, IAl
 
 			} else if (ECriteriaChange.CRITERIA_CHANGES.equals(change)) {
 				removeDomainAssignmentsOperation(ERemoveDomainAssignments.ALL, null);
-				
-			} else if (ECriteriaChange.MOVE_CRITERION.equals(change)) {
-				Criterion criterion = (Criterion) event.getOldValue();
-				if (criterion != null) {
-					removeDomainAssignmentsOperation(ERemoveDomainAssignments.CRITERION, criterion);
-				}
 			}
 		}
 
