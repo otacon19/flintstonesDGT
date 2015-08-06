@@ -15,5 +15,7 @@ Export-Package: sinbad2.element,
  sinbad2.element.expert,
  sinbad2.element.expert.handler.move,
  sinbad2.element.expert.listener,
- sinbad2.element.expert.operation
-Require-Bundle: sinbad2.resolutionphase;visibility:=reexport
+ sinbad2.element.expert.operation,
+ sinbad2.element.mec
+Require-Bundle: sinbad2.resolutionphase;visibility:=reexport,
+ org.eclipse.swt

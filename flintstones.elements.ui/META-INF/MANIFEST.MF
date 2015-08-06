@@ -10,6 +10,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6,
  JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: sinbad2.element.ui.sourceprovider,
+ sinbad2.element.ui.view.alternatives,
  sinbad2.element.ui.view.elements,
  sinbad2.element.ui.view.experts,
  sinbad2.element.ui.view.experts.provider

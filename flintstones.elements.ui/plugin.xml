@@ -828,24 +828,6 @@
       </menuContribution>
       <menuContribution
             allPopups="false"
-            locationURI="toolbar:flintstones.element.ui.view.contexts">
-         <command
-               commandId="flintstones.element.context.add"
-               style="push">
-            <visibleWhen
-                  checkEnabled="false">
-            </visibleWhen>
-         </command>
-         <command
-               commandId="flintstones.element.context.remove"
-               style="push">
-            <visibleWhen
-                  checkEnabled="false">
-            </visibleWhen>
-         </command>
-      </menuContribution>
-      <menuContribution
-            allPopups="false"
             locationURI="toolbar:flintstones.element.ui.view.indexes">
          <command
                commandId="flintstones.element.index.add"

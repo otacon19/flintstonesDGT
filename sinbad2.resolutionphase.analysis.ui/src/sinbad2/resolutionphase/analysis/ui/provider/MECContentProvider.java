@@ -8,25 +8,24 @@ import org.eclipse.jface.viewers.Viewer;
 
 import sinbad2.element.ProblemElementsManager;
 import sinbad2.element.ProblemElementsSet;
-import sinbad2.element.alternative.Alternative;
+import sinbad2.element.mec.MEC;
 
 
 public class MECContentProvider implements IStructuredContentProvider {
 	
 	private ProblemElementsManager _elementManager;
 	private ProblemElementsSet _elementSet;
-	private List<Alternative> _alternatives;
+	private List<MEC> _mecs;
 	
 	
 	public MECContentProvider() {
-		_alternatives = null;
+		_mecs = null;
 	}
 	
 	public MECContentProvider(TableViewer tableViewer) {
-		
 		_elementManager = ProblemElementsManager.getInstance();
 		_elementSet = _elementManager.getActiveElementSet();
-		_alternatives = _elementSet.getAlternatives();
+		_mecs = _elementSet.getMecs();
 	}
 	
 	@Override
@@ -35,15 +34,13 @@ public class MECContentProvider implements IStructuredContentProvider {
 	@Override
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {}
 
-	
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public Object[] getElements(Object inputElement) {
-		return ((List<Alternative>)inputElement).toArray();
+		return ((List<MEC>)inputElement).toArray();
 	}
 	
 	public Object getInput() {
-		return _alternatives;
+		return _mecs;
 	}
 }

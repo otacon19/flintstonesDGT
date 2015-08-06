@@ -24,6 +24,7 @@ import sinbad2.element.expert.Expert;
 import sinbad2.element.expert.listener.EExpertsChange;
 import sinbad2.element.expert.listener.ExpertsChangeEvent;
 import sinbad2.element.expert.listener.IExpertsChangeListener;
+import sinbad2.element.mec.MEC;
 import sinbad2.resolutionphase.io.XMLRead;
 
 public class ProblemElementsSet implements Cloneable {
@@ -31,6 +32,8 @@ public class ProblemElementsSet implements Cloneable {
 	private List<Expert> _experts;
 	private List<Alternative> _alternatives;
 	private List<Criterion> _criteria;
+	
+	private List<MEC> _mecs;
 	
 	private List<IExpertsChangeListener> _expertsListener;
 	private List<IAlternativesChangeListener> _alternativesListener;
@@ -41,6 +44,8 @@ public class ProblemElementsSet implements Cloneable {
 		_experts = new LinkedList<Expert>();
 		_alternatives = new LinkedList<Alternative>();
 		_criteria = new LinkedList<Criterion>();
+		
+		_mecs = new LinkedList<MEC>();
 		
 		_expertsListener = new LinkedList<IExpertsChangeListener>();
 		_alternativesListener = new LinkedList<IAlternativesChangeListener>();
@@ -59,8 +64,8 @@ public class ProblemElementsSet implements Cloneable {
 		return _criteria;
 	}
 	
-	public List<Criterion> getElements() {
-		return _criteria;
+	public List<MEC> getMecs() {
+		return _mecs;
 	}
 	
 	public void setExperts(List<Expert> experts) {
@@ -119,6 +124,10 @@ public class ProblemElementsSet implements Cloneable {
 		notifyCriteriaChanges(new CriteriaChangeEvent(ECriteriaChange.ADD_CRITERION, null, criterion, inUndoRedo));
 		
 	}
+	
+	public void addMEC(MEC mec) {
+		_mecs.add(mec);
+	}	
 	
 	/*public void moveExpert(Expert moveExpert, Expert newParent, Expert oldParent, boolean inUndoRedo) {
 		

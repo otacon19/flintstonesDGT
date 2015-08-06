@@ -50,7 +50,7 @@
          </view>
          <view
                closeable="false"
-               id="flintstones.element.ui.view.contexts"
+               id="flintstones.element.ui.view.indexes"
                minimized="false"
                moveable="false"
                ratio="0.33"
@@ -62,12 +62,12 @@
          </view>
          <view
                closeable="false"
-               id="flintstones.element.ui.view.indexes"
+               id="flintstones.element.ui.view.contexts"
                minimized="false"
                moveable="false"
                ratio="0.45"
                relationship="bottom"
-               relative="flintstones.element.ui.view.contexts"
+               relative="flintstones.element.ui.view.indexes"
                showTitle="true"
                standalone="true"
                visible="true">
