@@ -12,14 +12,14 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import sinbad2.element.ProblemElementsManager;
 import sinbad2.element.ProblemElementsSet;
 import sinbad2.element.alternative.Alternative;
-import sinbad2.element.alternative.operation.RemoveAlternativeOperation;
+import sinbad2.element.alternative.operation.RemoveContextOperation;
 import sinbad2.element.ui.nls.Messages;
 
-public class RemoveAlternativeHandler extends AbstractHandler {
+public class RemoveContextHandler extends AbstractHandler {
 	
-	public static final String ID = "flintstones.element.alternative.remove"; //$NON-NLS-1$
+public static final String ID = "flintstones.element.context.remove"; //$NON-NLS-1$
 	
-	public RemoveAlternativeHandler() {}
+	public RemoveContextHandler() {}
 	
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -30,7 +30,7 @@ public class RemoveAlternativeHandler extends AbstractHandler {
 		IStructuredSelection selection = (IStructuredSelection) HandlerUtil.getCurrentSelectionChecked(event);
 		Alternative alternative = (Alternative) selection.getFirstElement();
 		
-		IUndoableOperation operation = new RemoveAlternativeOperation(Messages.RemoveAlternativeHandler_Remove_alternative, elementSet, alternative);
+		IUndoableOperation operation = new RemoveContextOperation(Messages.RemoveAlternativeHandler_Remove_alternative, elementSet, alternative.getId());
 		IOperationHistory operationHistory = OperationHistoryFactory.getOperationHistory();
 		
 		operation.addContext(IOperationHistory.GLOBAL_UNDO_CONTEXT);
@@ -40,4 +40,5 @@ public class RemoveAlternativeHandler extends AbstractHandler {
 		return null;
 	}
 
+	
 }

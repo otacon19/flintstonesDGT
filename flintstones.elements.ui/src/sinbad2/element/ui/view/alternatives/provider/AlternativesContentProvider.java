@@ -80,14 +80,14 @@ public class AlternativesContentProvider implements IStructuredContentProvider,
 			case REMOVE_ALTERNATIVE:
 				_tableViewer.refresh();
 				break;
-				
 			case REMOVE_MULTIPLE_ALTERNATIVES:
 				_tableViewer.refresh();
 				break;
-				
 			case MODIFY_ALTERNATIVE:
 				_tableViewer.refresh();
 				break;	
+			default:
+				break;
 		}
 		
 		packViewer();

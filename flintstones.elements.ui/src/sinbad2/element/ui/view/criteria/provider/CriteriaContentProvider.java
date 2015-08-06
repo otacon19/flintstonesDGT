@@ -85,6 +85,8 @@ public class CriteriaContentProvider implements IStructuredContentProvider, ICri
 			case MODIFY_CRITERION:
 				_tableViewer.refresh();
 				break;
+			default: 
+				break;
 		}
 		
 		packViewer();

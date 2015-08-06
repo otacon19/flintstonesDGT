@@ -27,10 +27,10 @@ import sinbad2.element.ui.sourceprovider.ElementSourceProvider;
 import sinbad2.element.ui.view.alternatives.provider.AlternativeIdLabelProvider;
 import sinbad2.element.ui.view.alternatives.provider.AlternativesContentProvider;
 
-public class AlternativesView extends ViewPart {
+public class ContextsView extends ViewPart {
 	
-	public static final String ID = "flintstones.element.ui.view.alternatives"; //$NON-NLS-1$
-	public static final String CONTEXT_ID = "flintstones.element.ui.view.alternatives.alternatives_view"; //$NON-NLS-1$
+	public static final String ID = "flintstones.element.ui.view.contexts"; //$NON-NLS-1$
+	public static final String CONTEXT_ID = "flintstones.element.ui.view.context.contexts_view"; //$NON-NLS-1$
 	
 	private static final IContextService _contextService = (IContextService) PlatformUI.getWorkbench().getService(IContextService.class);
 
@@ -38,7 +38,7 @@ public class AlternativesView extends ViewPart {
 	
 	private AlternativesContentProvider _provider;
 	
-	public AlternativesView() {}
+	public ContextsView() {}
 	
 	@Override
 	public void createPartControl(Composite parent) {
@@ -124,7 +124,7 @@ public class AlternativesView extends ViewPart {
 		tvc.setLabelProvider(new AlternativeIdLabelProvider());
 		TableColumn tc = tvc.getColumn();
 		tc.setResizable(false);
-		tc.pack();
+		tc.setWidth(50);
 	}
 	
 	private void hookContextMenu() {
@@ -139,4 +139,5 @@ public class AlternativesView extends ViewPart {
 		_tableViewer.getControl().setFocus();
 		
 	}
+
 }

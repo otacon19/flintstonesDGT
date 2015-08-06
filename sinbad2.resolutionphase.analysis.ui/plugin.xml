@@ -27,11 +27,10 @@
             targetID="flintstones.resolutionphase.analysis.perspective">
          <view
                closeable="false"
-               id="flintstones.element.ui.view.experts"
+               id="flintstones.resolutionphase.analysis.ui.view.mec"
                minimized="false"
                moveable="false"
-               ratio="0.33"
-               relationship="top"
+               relationship="right"
                relative="org.eclipse.ui.editorss"
                showTitle="true"
                standalone="true"
@@ -39,7 +38,19 @@
          </view>
          <view
                closeable="false"
-               id="flintstones.element.ui.view.alternatives"
+               id="flintstones.element.ui.view.experts"
+               minimized="false"
+               moveable="false"
+               ratio="0.45"
+               relationship="left"
+               relative="flintstones.resolutionphase.analysis.ui.view.mec"
+               showTitle="true"
+               standalone="true"
+               visible="true">
+         </view>
+         <view
+               closeable="false"
+               id="flintstones.element.ui.view.contexts"
                minimized="false"
                moveable="false"
                ratio="0.33"
@@ -51,17 +62,33 @@
          </view>
          <view
                closeable="false"
-               id="flintstones.element.ui.view.criteria"
+               id="flintstones.element.ui.view.indexes"
                minimized="false"
                moveable="false"
-               ratio="0.33"
+               ratio="0.45"
                relationship="bottom"
-               relative="flintstones.element.ui.view.alternatives"
+               relative="flintstones.element.ui.view.contexts"
                showTitle="true"
                standalone="true"
                visible="true">
          </view>
       </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="flintstones.resolutionphase.analysis.ui.category"
+            name="MEC">
+      </category>
+      <view
+            allowMultiple="false"
+            category="flintstones.resolutionphase.analysis.ui.category"
+            class="sinbad2.resolutionphase.analysis.ui.view.MECView"
+            icon="icons/formula.png"
+            id="flintstones.resolutionphase.analysis.ui.view.mec"
+            name="MEC"
+            restorable="true">
+      </view>
    </extension>
 
 </plugin>

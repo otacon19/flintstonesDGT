@@ -8,21 +8,19 @@ import org.eclipse.core.runtime.Status;
 
 import sinbad2.core.undoable.UndoableOperation;
 import sinbad2.element.ProblemElementsSet;
-import sinbad2.element.alternative.Alternative;
+import sinbad2.element.alternative.listener.AlternativesChangeEvent;
+import sinbad2.element.alternative.listener.EAlternativesChange;
 
-public class AddAlternativeOperation extends UndoableOperation {
-	
+public class AddContextOperation extends UndoableOperation {
+
 	private ProblemElementsSet _elementSet;
-	private Alternative _addAlternative;
 	private String _addAlternativeId;
 	
-	public AddAlternativeOperation(String label, ProblemElementsSet elementSet, String addAlternativeId) {
+	public AddContextOperation(String label, ProblemElementsSet elementSet, String addAlternativeId) {
 		super(label);
 		
 		_elementSet = elementSet;
-		_addAlternativeId = addAlternativeId;
-		_addAlternative = new Alternative(_addAlternativeId);
-		
+		_addAlternativeId = addAlternativeId;	
 	}
 
 	@Override
@@ -33,7 +31,7 @@ public class AddAlternativeOperation extends UndoableOperation {
 	@Override
 	public IStatus redo(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 		
-		_elementSet.addAlternative(_addAlternative, _inUndoRedo);
+		_elementSet.notifyAlternativesChanges(new AlternativesChangeEvent(EAlternativesChange.ADD_CONTEXT, null, _addAlternativeId, _inUndoRedo));
 		
 		return Status.OK_STATUS;
 	}
@@ -41,8 +39,9 @@ public class AddAlternativeOperation extends UndoableOperation {
 	@Override
 	public IStatus undo(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 		
-		_elementSet.removeAlternative(_addAlternative, _inUndoRedo);
+		_elementSet.notifyAlternativesChanges(new AlternativesChangeEvent(EAlternativesChange.ADD_CONTEXT, null, _addAlternativeId, _inUndoRedo));
 		
 		return Status.OK_STATUS;
 	}
+
 }

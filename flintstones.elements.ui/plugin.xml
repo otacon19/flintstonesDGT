@@ -42,6 +42,28 @@
             name="%view.element"
             restorable="true">
       </view>
+      <category
+            id="dgt.elements.category"
+            name="DGT">
+      </category>
+      <view
+            allowMultiple="false"
+            category="dgt.elements.category"
+            class="sinbad2.element.ui.view.alternatives.ContextsView"
+            icon="icons/alternative.png"
+            id="flintstones.element.ui.view.contexts"
+            name="Contexts"
+            restorable="true">
+      </view>
+      <view
+            allowMultiple="false"
+            category="dgt.elements.category"
+            class="sinbad2.element.ui.view.criteria.IndexesView"
+            icon="icons/criterion.png"
+            id="flintstones.element.ui.view.indexes"
+            name="Indexes"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.contexts">
@@ -63,6 +85,14 @@
       <context
             id="flintstones.element.ui.view.element.element_view"
             name="%context.element">
+      </context>
+      <context
+            id="flintstones.element.ui.view.context.contexts_view"
+            name="Contexts context">
+      </context>
+      <context
+            id="flintstones.element.ui.view.indexes.indexes_view"
+            name="Indexes context">
       </context>
    </extension>
    <extension
@@ -123,6 +153,34 @@
             categoryId="flintstones.element.criteria.category"
             id="flintstones.element.criterion.remove"
             name="%command.criterion.remove">
+      </command>
+      <category
+            id="flintstones.element.contexts.category"
+            name="contexts">
+      </category>
+      <command
+            categoryId="flintstones.element.contexts.category"
+            id="flintstones.element.context.add"
+            name="&amp;Add">
+      </command>
+      <command
+            categoryId="flintstones.element.contexts.category"
+            id="flintstones.element.context.remove"
+            name="&amp;Remove">
+      </command>
+      <category
+            id="flintstones.element.indexes.category"
+            name="indexes">
+      </category>
+      <command
+            categoryId="flintstones.element.indexes.category"
+            id="flintstones.element.index.add"
+            name="&amp;Add">
+      </command>
+      <command
+            categoryId="flintstones.element.indexes.category"
+            id="flintstones.element.index.remove"
+            name="&amp;Remove">
       </command>
    </extension>
    <extension
@@ -230,14 +288,6 @@
       <handler
             class="sinbad2.element.ui.handler.alternative.add.AddAlternativeHandler"
             commandId="flintstones.element.alternative.add">
-         <enabledWhen>
-            <with
-                  variable="flintstones.element.ui.can.be.modified.state">
-               <equals
-                     value="ENABLED">
-               </equals>
-            </with>
-         </enabledWhen>
       </handler>
       <handler
             class="sinbad2.element.ui.handler.alternative.modify.ModifyAlternativeHandler"
@@ -415,6 +465,90 @@
                         value="ENABLED">
                   </equals>
                </with>
+            </and>
+         </activeWhen>
+      </handler>
+      <handler
+            class="sinbad2.element.ui.handler.alternative.add.AddContextHandler"
+            commandId="flintstones.element.context.add">
+         <activeWhen>
+            <and>
+               <with
+                     variable="selection">
+                  <iterate
+                        ifEmpty="false"
+                        operator="and">
+                     <instanceof
+                           value="sinbad2.element.alternative.Alternative">
+                     </instanceof>
+                  </iterate>
+               </with>
+               <reference
+                     definitionId="oneElementSelected">
+               </reference>
+            </and>
+         </activeWhen>
+      </handler>
+      <handler
+            class="sinbad2.element.ui.handler.alternative.remove.RemoveContextHandler"
+            commandId="flintstones.element.context.remove">
+         <activeWhen>
+            <and>
+               <with
+                     variable="selection">
+                  <iterate
+                        ifEmpty="false"
+                        operator="and">
+                     <instanceof
+                           value="sinbad2.element.alternative.Alternative">
+                     </instanceof>
+                  </iterate>
+               </with>
+               <reference
+                     definitionId="oneElementSelected">
+               </reference>
+            </and>
+         </activeWhen>
+      </handler>
+      <handler
+            class="sinbad2.element.ui.handler.criterion.add.AddIndexHandler"
+            commandId="flintstones.element.index.add">
+         <activeWhen>
+            <and>
+               <with
+                     variable="selection">
+                  <iterate
+                        ifEmpty="false"
+                        operator="and">
+                     <instanceof
+                           value="sinbad2.element.criterion.Criterion">
+                     </instanceof>
+                  </iterate>
+               </with>
+               <reference
+                     definitionId="oneElementSelected">
+               </reference>
+            </and>
+         </activeWhen>
+      </handler>
+      <handler
+            class="sinbad2.element.ui.handler.criterion.remove.RemoveIndexHandler"
+            commandId="flintstones.element.index.remove">
+         <activeWhen>
+            <and>
+               <with
+                     variable="selection">
+                  <iterate
+                        ifEmpty="false"
+                        operator="and">
+                     <instanceof
+                           value="sinbad2.element.criterion.Criterion">
+                     </instanceof>
+                  </iterate>
+               </with>
+               <reference
+                     definitionId="oneElementSelected">
+               </reference>
             </and>
          </activeWhen>
       </handler>
@@ -692,6 +826,42 @@
             </visibleWhen>
          </command>
       </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:flintstones.element.ui.view.contexts">
+         <command
+               commandId="flintstones.element.context.add"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+            </visibleWhen>
+         </command>
+         <command
+               commandId="flintstones.element.context.remove"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+            </visibleWhen>
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:flintstones.element.ui.view.indexes">
+         <command
+               commandId="flintstones.element.index.add"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+            </visibleWhen>
+         </command>
+         <command
+               commandId="flintstones.element.index.remove"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+            </visibleWhen>
+         </command>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.commandImages">
@@ -729,6 +899,22 @@
       </image>
       <image
             commandId="flintstones.element.criterion.remove"
+            icon="platform:/plugin/org.eclipse.ui/icons/full/obj16/delete_obj.gif">
+      </image>
+      <image
+            commandId="flintstones.element.context.add"
+            icon="platform:/plugin/org.eclipse.ui/icons/full/obj16/add_obj.gif">
+      </image>
+      <image
+            commandId="flintstones.element.context.remove"
+            icon="platform:/plugin/org.eclipse.ui/icons/full/obj16/delete_obj.gif">
+      </image>
+      <image
+            commandId="flintstones.element.index.add"
+            icon="platform:/plugin/org.eclipse.ui/icons/full/obj16/add_obj.gif">
+      </image>
+      <image
+            commandId="flintstones.element.index.remove"
             icon="platform:/plugin/org.eclipse.ui/icons/full/obj16/delete_obj.gif">
       </image>
    </extension>

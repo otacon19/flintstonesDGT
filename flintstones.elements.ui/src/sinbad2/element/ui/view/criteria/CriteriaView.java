@@ -1,7 +1,5 @@
 package sinbad2.element.ui.view.criteria;
 
-
-
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.DoubleClickEvent;
