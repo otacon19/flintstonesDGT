@@ -1,58 +1,58 @@
 package sinbad2.element.expert;
 
-/*import java.util.Collections;
+import java.util.Collections;
 import java.util.LinkedList;
-import java.util.List;*/
+import java.util.List;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-//import sinbad2.core.validator.Validator;
+import sinbad2.core.validator.Validator;
 import sinbad2.element.ProblemElement;
 
 public class Expert extends ProblemElement {
 	
-	//private List<Expert> _childrens;
-	//private Expert _parent;
+	private List<Expert> _childrens;
+	private Expert _parent;
 
 	public Expert() {
 		super();
 		
-		//_childrens = null;
-		//_parent = null;
+		_childrens = null;
+		_parent = null;
 	}
 
 	public Expert(String id) {
 		super(id);
 		
-		//_childrens = null;
-		//_parent = null;
+		_childrens = null;
+		_parent = null;
 	}
 	
 	@Override
 	public String getCanonicalId(){
 		String result = null;
 		
-		/*if(_parent != null) {
+		if(_parent != null) {
 			result = _parent.getCanonicalId() + ">" + _id; //$NON-NLS-1$
 		} else {
 			result = _id;
-		}*/
+		}
 		
 		result = _id;
 		
 		return result;
 	}
 	
-	/*public void setParent(Expert parent) {
+	public void setParent(Expert parent) {
 		_parent = parent;
-	}*/
+	}
 	
-	/*public Expert getParent() {
+	public Expert getParent() {
 		return _parent;
-	}*/
+	}
 
-	/*public void addChildren(Expert children) {
+	public void addChildren(Expert children) {
 		Validator.notNull(children);
 		Validator.notSameElement(this, children);
 		
@@ -60,37 +60,37 @@ public class Expert extends ProblemElement {
 			_childrens = new LinkedList<Expert>();
 		}
 		_childrens.add(children);
-		//children.setParent(this);
+		children.setParent(this);
 		
 		Collections.sort(_childrens);
-	}*/
+	}
 	
-	/*public void removeChildren(Expert children) {
+	public void removeChildren(Expert children) {
 		
 		if(_childrens != null) {
 			_childrens.remove(children);
-			//children.setParent(null);
+			children.setParent(null);
 		}
 		
 		Collections.sort(_childrens);
 			
-	}*/
+	}
 
-	/*public List<Expert> getChildrens() {
+	public List<Expert> getChildrens() {
 		return _childrens;
-	}*/
+	}
 	
-	/*public void setChildrens(List<Expert> childrens) {
+	public void setChildrens(List<Expert> childrens) {
 		_childrens = childrens;
-	}*/
+	}
 	
-	/*public boolean hasChildrens() {
+	public boolean hasChildrens() {
 		if(_childrens != null && !_childrens.isEmpty()) {
 			return true;
 		}
 		
 		return false;
-	}*/
+	}
 	
 	@Override
 	public boolean equals(Object obj) {
@@ -109,14 +109,14 @@ public class Expert extends ProblemElement {
 		final Expert other = (Expert) obj;
 		
 		EqualsBuilder eb = new EqualsBuilder();
-		//eb.append(_childrens, other._childrens);
+		eb.append(_childrens, other._childrens);
 		eb.append(_id, other._id);
-		//eb.append(_parent, other._parent);
+		eb.append(_parent, other._parent);
 		
 		return eb.isEquals();
 	}
 	
-	/*public static Expert getExpertByCanonicalId(List<Expert> experts, String formatId) {
+	public static Expert getExpertByCanonicalId(List<Expert> experts, String formatId) {
 		Validator.notNull(experts);
 		Validator.notNull(formatId);
 		
@@ -131,18 +131,18 @@ public class Expert extends ProblemElement {
 			}
 		}
 		return null;
-	}*/
+	}
 	
 	@Override
 	public int hashCode() {
 		HashCodeBuilder hcb = new HashCodeBuilder(17, 31);
 		hcb.append(_id);
-		//hcb.append(getCanonicalId());
-		/*if(hasChildrens()) {
+		hcb.append(getCanonicalId());
+		if(hasChildrens()) {
 			for(Expert expert: _childrens) {
 				hcb.append(expert);
 			}
-		}*/
+		}
 		return hcb.toHashCode();
 	}
 	
@@ -152,20 +152,20 @@ public class Expert extends ProblemElement {
 		Expert result = null;
 		
 		result = (Expert) super.clone();
-		//result.setParent(_parent);
+		result.setParent(_parent);
 		
-		/*if(hasChildrens()) {
+		if(hasChildrens()) {
 			List<Expert> childrens = new LinkedList<Expert>();
 			for(Expert expert: _childrens){
 				childrens.add((Expert) expert.clone());
 			}
 			result.setChildrens(childrens);
-		}*/
+		}
 		
 		return result;
 	}
 	
-	/*private static Expert searchExpertForPathId(String parentId, String formatId, List<Expert> experts) {
+	private static Expert searchExpertForPathId(String parentId, String formatId, List<Expert> experts) {
 		
 		for(Expert expert: experts) {
 			if(expert.getId().equals(parentId)) {
@@ -174,5 +174,5 @@ public class Expert extends ProblemElement {
 		}
 		
 		return null;
-	}*/
+	}
 }

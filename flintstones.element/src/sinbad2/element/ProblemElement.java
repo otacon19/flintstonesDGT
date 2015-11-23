@@ -49,9 +49,5 @@ public abstract class ProblemElement implements Cloneable, Comparable<ProblemEle
 		result.setId(new String(_id));
 		
 		return result;
-		
 	}
-
-	
-
 }

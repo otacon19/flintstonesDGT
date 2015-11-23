@@ -41,13 +41,13 @@ public class AddExpertHandler extends AbstractHandler {
 		
 		if(dialog.open() == Window.OK) {
 			id = dialog.getValue();
-			//parent = dialog.isMember() ? parent : null;
+			parent = dialog.isMember() ? parent : null;
 		} else {
 			doit = false;
 		}
 		
 		if(doit) {	
-			IUndoableOperation operation = new AddExpertOperation(Messages.AddExpertHandler_Add_expert, id, /*parent,*/ elementSet);
+			IUndoableOperation operation = new AddExpertOperation(Messages.AddExpertHandler_Add_expert, id, parent, elementSet);
 			IOperationHistory operationHistory = OperationHistoryFactory.getOperationHistory();
 			
 			operation.addContext(IOperationHistory.GLOBAL_UNDO_CONTEXT);

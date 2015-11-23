@@ -16,14 +16,14 @@ public class RemoveMultipleExpertsOperation extends UndoableOperation {
 	
 	private ProblemElementsSet _elementSet;
 	private List<Expert> _removeSeveralExperts;
-	//private Expert _firstParent;
+	private Expert _firstParent;
 
 	public RemoveMultipleExpertsOperation(String label, List<Expert> expertsRemove, ProblemElementsSet elementSet) {
 		super(label);
 		
 		_elementSet = elementSet;
 		_removeSeveralExperts = expertsRemove;
-		//_firstParent = _removeSeveralExperts.get(0).getParent();
+		_firstParent = _removeSeveralExperts.get(0).getParent();
 	}
 
 	@Override
@@ -33,32 +33,32 @@ public class RemoveMultipleExpertsOperation extends UndoableOperation {
 
 	@Override
 	public IStatus redo(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-		//boolean hasParent = false;
+		boolean hasParent = false;
 		
-		/*if(_firstParent == null) {
+		if(_firstParent == null) {
 			_elementSet.removeMultipleExperts(_removeSeveralExperts, hasParent, _inUndoRedo);
 		} else {
 			hasParent = true;
 			_elementSet.removeMultipleExperts(_removeSeveralExperts, hasParent, _inUndoRedo);
-		}*/
+		}
 		
-		_elementSet.removeMultipleExperts(_removeSeveralExperts, /*hasParent,*/ _inUndoRedo);
+		_elementSet.removeMultipleExperts(_removeSeveralExperts, hasParent, _inUndoRedo);
 				
 		return Status.OK_STATUS;	
 	}
 
 	@Override
 	public IStatus undo(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-		//boolean hasParent = false;
+		boolean hasParent = false;
 		
-		/*if(_firstParent == null) {
+		if(_firstParent == null) {
 			_elementSet.addMultipleExperts(_removeSeveralExperts, hasParent, _inUndoRedo);
 		} else {
 			hasParent = true;
 			_elementSet.addMultipleExperts(_removeSeveralExperts, hasParent, _inUndoRedo);
-		}*/
+		}
 		
-		_elementSet.addMultipleExperts(_removeSeveralExperts, /*hasParent,*/ _inUndoRedo);
+		_elementSet.addMultipleExperts(_removeSeveralExperts, hasParent, _inUndoRedo);
 		
 		return Status.OK_STATUS;
 	}
